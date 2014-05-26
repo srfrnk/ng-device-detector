@@ -1,0 +1,1 @@
+#Angular module to detect OS / Browser / Device
