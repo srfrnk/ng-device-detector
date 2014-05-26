@@ -1,12 +1,12 @@
 (function(angular) {
 "use strict";
-angular.module("ng.deviceDetector")
+angular.module("ng.deviceDetector",[])
 .factory("deviceDetector", [
 	function () {
 		var ua=navigator.userAgent;
 		var deviceInfo = {
-			userAgent:ua,
-			raw:{
+		    raw: {
+		        userAgent: ua,
 				os:{
 						windows:/\bWindows\b/.test(ua),
 						mac:/\bMacOS\b/.test(ua),
@@ -28,21 +28,23 @@ angular.module("ng.deviceDetector")
 					blackberry:/\bblackberry\b/.test(ua),
 				}
 			}
-			os: deviceInfo.raw.os.windows ? "windows" :
-					deviceInfo.raw.os.mac ? "mac" :
-						deviceInfo.raw.os.linux ? "linux" :
-							deviceInfo.raw.os.unix? "unix" :
-								deviceInfo.raw.os.android? "android",
-			browser: deviceInfo.raw.browser.ie ? "ie" :
-					deviceInfo.raw.browser.opera ? "opera" :
-						deviceInfo.raw.browser.safari ? "safari" :
-							deviceInfo.raw.browser.firefox? "firefox" :
-								deviceInfo.raw.browser.chrome? "chrome",
-			device: deviceInfo.raw.device.android ? "android" :
-						deviceInfo.raw.device.iphone ? "iphone" :
-							deviceInfo.raw.device.ipad ? "ipad" :
-								deviceInfo.raw.device.blackberry ? "blackberry"
 		};
+
+	    deviceInfo.os = deviceInfo.raw.os.windows ? "windows" :
+	        (deviceInfo.raw.os.mac ? "mac" :
+	            (deviceInfo.raw.os.linux ? "linux" :
+	                (deviceInfo.raw.os.unix ? "unix" :
+	                    (deviceInfo.raw.os.android ? "android" : "unknown"))));
+	    deviceInfo.browser = deviceInfo.raw.browser.ie ? "ie" :
+	        (deviceInfo.raw.browser.opera ? "opera" :
+	            (deviceInfo.raw.browser.chrome ? "chrome" :
+	                (deviceInfo.raw.browser.firefox ? "firefox" :
+	                    (deviceInfo.raw.browser.safari ? "safari" : "unknown"))));
+	    deviceInfo.device = deviceInfo.raw.device.android ? "android" :
+	        (deviceInfo.raw.device.iphone ? "iphone" :
+	            (deviceInfo.raw.device.ipad ? "ipad" :
+	                (deviceInfo.raw.device.blackberry ? "blackberry" : "unknown")));
+	    
 		return deviceInfo;
 	}
 ])
