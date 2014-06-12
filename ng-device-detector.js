@@ -9,7 +9,7 @@ angular.module("ng.deviceDetector",[])
 		        userAgent: ua,
 				os:{
 						windows:/\bWindows\b/.test(ua),
-						mac:/\bMacOS\b/.test(ua),
+						mac:/\bMac OS\b/.test(ua),
 						linux:/\bLinux\b/.test(ua),
 						unix:/\bUNIX\b/.test(ua),
 						android:/\bAndroid\b/.test(ua),
