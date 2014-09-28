@@ -8,11 +8,12 @@ angular.module("ng.deviceDetector",[])
 		    raw: {
 		        userAgent: ua,
 				os:{
-						windows:/\bWindows\b/.test(ua),
-						mac:/\bMac OS\b/.test(ua),
-						linux:/\bLinux\b/.test(ua),
-						unix:/\bUNIX\b/.test(ua),
-						android:/\bAndroid\b/.test(ua),
+					windows:/\bWindows\b/.test(ua),
+					mac:/\bMac OS\b/.test(ua),
+					linux:/\bLinux\b/.test(ua),
+					unix:/\bUNIX\b/.test(ua),
+					android:/\bAndroid\b/.test(ua),
+					firefoxos:/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua)
 				},
 				browser:{
 					chrome:/\bChrome\b/.test(ua),
@@ -26,6 +27,7 @@ angular.module("ng.deviceDetector",[])
 					ipad:/\biPad\b/.test(ua),
 					iphone:/\biPhone\b/.test(ua),
 					blackberry:/\bblackberry\b/.test(ua),
+					firefoxos:/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua)
 				}
 			}
 		};
@@ -34,7 +36,8 @@ angular.module("ng.deviceDetector",[])
 	        (deviceInfo.raw.os.mac ? "mac" :
 	            (deviceInfo.raw.os.linux ? "linux" :
 	                (deviceInfo.raw.os.unix ? "unix" :
-	                    (deviceInfo.raw.os.android ? "android" : "unknown"))));
+	                    (deviceInfo.raw.os.android ? "android" :
+	                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown")))));
 	    deviceInfo.browser = deviceInfo.raw.browser.ie ? "ie" :
 	        (deviceInfo.raw.browser.opera ? "opera" :
 	            (deviceInfo.raw.browser.chrome ? "chrome" :
@@ -43,7 +46,8 @@ angular.module("ng.deviceDetector",[])
 	    deviceInfo.device = deviceInfo.raw.device.android ? "android" :
 	        (deviceInfo.raw.device.iphone ? "iphone" :
 	            (deviceInfo.raw.device.ipad ? "ipad" :
-	                (deviceInfo.raw.device.blackberry ? "blackberry" : "unknown")));
+	                (deviceInfo.raw.device.blackberry ? "blackberry" :
+	                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown"))));
 	    
 		return deviceInfo;
 	}
