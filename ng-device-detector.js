@@ -10,6 +10,7 @@ angular.module("ng.deviceDetector",[])
 				os:{
 					windows:/\bWindows\b/.test(ua),
 					mac:/\bMac OS\b/.test(ua),
+					ios:/\biPad\b/.test(ua) || /\biPhone\b/.test(ua) || /\biPod\b/.test(ua),
 					linux:/\bLinux\b/.test(ua),
 					unix:/\bUNIX\b/.test(ua),
 					android:/\bAndroid\b/.test(ua),
@@ -26,6 +27,7 @@ angular.module("ng.deviceDetector",[])
 					android:/\bAndroid\b/.test(ua),
 					ipad:/\biPad\b/.test(ua),
 					iphone:/\biPhone\b/.test(ua),
+					ipod:/\biPod\b/.test(ua),
 					blackberry:/\bblackberry\b/.test(ua),
 					firefoxos:/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua)
 				}
@@ -34,10 +36,11 @@ angular.module("ng.deviceDetector",[])
 
 	    deviceInfo.os = deviceInfo.raw.os.windows ? "windows" :
 	        (deviceInfo.raw.os.mac ? "mac" :
-	            (deviceInfo.raw.os.linux ? "linux" :
-	                (deviceInfo.raw.os.unix ? "unix" :
-	                    (deviceInfo.raw.os.android ? "android" :
-	                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown")))));
+        		(deviceInfo.raw.os.ios ? "ios" :
+		            (deviceInfo.raw.os.linux ? "linux" :
+		                (deviceInfo.raw.os.unix ? "unix" :
+		                    (deviceInfo.raw.os.android ? "android" :
+		                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown")))));
 	    deviceInfo.browser = deviceInfo.raw.browser.ie ? "ie" :
 	        (deviceInfo.raw.browser.opera ? "opera" :
 	            (deviceInfo.raw.browser.chrome ? "chrome" :
@@ -46,8 +49,9 @@ angular.module("ng.deviceDetector",[])
 	    deviceInfo.device = deviceInfo.raw.device.android ? "android" :
 	        (deviceInfo.raw.device.iphone ? "iphone" :
 	            (deviceInfo.raw.device.ipad ? "ipad" :
-	                (deviceInfo.raw.device.blackberry ? "blackberry" :
-	                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown"))));
+		            (deviceInfo.raw.device.ipod ? "ipod" :
+		                (deviceInfo.raw.device.blackberry ? "blackberry" :
+		                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown"))));
 	    
 		return deviceInfo;
 	}
