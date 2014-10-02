@@ -11,9 +11,9 @@ angular.module("ng.deviceDetector",[])
 					windows:/\bWindows\b/.test(ua),
 					mac:/\bMac OS\b/.test(ua),
 					ios:/\biPad\b/.test(ua) || /\biPhone\b/.test(ua) || /\biPod\b/.test(ua),
+					android:/\bAndroid\b/.test(ua),
 					linux:/\bLinux\b/.test(ua),
 					unix:/\bUNIX\b/.test(ua),
-					android:/\bAndroid\b/.test(ua),
 					firefoxos:/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua)
 				},
 				browser:{
