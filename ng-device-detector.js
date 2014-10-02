@@ -40,7 +40,7 @@ angular.module("ng.deviceDetector",[])
 		            (deviceInfo.raw.os.linux ? "linux" :
 		                (deviceInfo.raw.os.unix ? "unix" :
 		                    (deviceInfo.raw.os.android ? "android" :
-		                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown")))));
+		                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown"))))));
 	    deviceInfo.browser = deviceInfo.raw.browser.ie ? "ie" :
 	        (deviceInfo.raw.browser.opera ? "opera" :
 	            (deviceInfo.raw.browser.chrome ? "chrome" :
@@ -51,7 +51,7 @@ angular.module("ng.deviceDetector",[])
 	            (deviceInfo.raw.device.ipad ? "ipad" :
 		            (deviceInfo.raw.device.ipod ? "ipod" :
 		                (deviceInfo.raw.device.blackberry ? "blackberry" :
-		                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown"))));
+		                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown")))));
 	    
 		return deviceInfo;
 	}
