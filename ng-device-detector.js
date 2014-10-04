@@ -35,8 +35,8 @@ angular.module("ng.deviceDetector",[])
 		};
 
 	    deviceInfo.os = deviceInfo.raw.os.windows ? "windows" :
-	        (deviceInfo.raw.os.mac ? "mac" :
-        		(deviceInfo.raw.os.ios ? "ios" :
+        	(deviceInfo.raw.os.ios ? "ios" :
+	        	(deviceInfo.raw.os.mac ? "mac" :
 		            (deviceInfo.raw.os.android ? "android" :
 		                (deviceInfo.raw.os.unix ? "unix" :
 		                    (deviceInfo.raw.os.linux ? "linux" :
