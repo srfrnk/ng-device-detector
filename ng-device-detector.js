@@ -17,9 +17,9 @@ angular.module("ng.deviceDetector",[])
 					firefoxos:/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua)
 				},
 				browser:{
-					chrome:/\bChrome\b/.test(ua),
+					chrome:/\bChrome\b/.test(ua) || /\bCriOS\b/.test(ua),
 					firefox:/\Firefox\b/.test(ua),
-					safari:/\Safari\b/.test(ua),
+					safari:/^((?!CriOS).)*\Safari\b.*$/.test(ua),
 					opera:/\Opera\b/.test(ua),
 					ie:/\bMSIE\b/.test(ua) || /\Trident\b/.test(ua),
 				},
