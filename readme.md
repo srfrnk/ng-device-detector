@@ -1,6 +1,8 @@
 #ng-device-detector
 ##Angular module to detect OS / Browser / Device
 
+[![Build Status](https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master)](https://travis-ci.org/srfrnk/ng-device-detector)
+
 Uses user-agent to set css classes or directly usable via JS.
 
 ### Install
