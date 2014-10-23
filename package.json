@@ -1,0 +1,30 @@
+{
+    "name": "ng-device-detector",
+    "version": "0.0.1",
+    "devDependencies": {
+        "karma": "~0.12",
+        "karma-jasmine": "^0.1.5",
+        "karma-phantomjs-launcher": "*",
+        "angular": "*",
+        "angular-mocks": "*",
+        "karma-nested-reporter": "*"
+    },
+    "scripts": {
+        "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    },
+    "description": "Uses user-agent to set css classes or directly usable via JS.",
+    "main": "ng-device-detector.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/srfrnk/ng-device-detector.git"
+    },
+    "keywords": [
+        "angularjs"
+    ],
+    "author": "srfrnk",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/srfrnk/ng-device-detector/issues"
+    },
+    "homepage": "https://github.com/srfrnk/ng-device-detector"
+}
