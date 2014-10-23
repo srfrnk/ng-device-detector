@@ -1,9 +1,9 @@
 (function(angular) {
 "use strict";
 angular.module("ng.deviceDetector",[])
-.factory("deviceDetector", [
-	function () {
-		var ua=navigator.userAgent;
+.factory("deviceDetector", ["$window",
+	function ($window) {
+		var ua=$window.navigator.userAgent;
 		var deviceInfo = {
 		    raw: {
 		        userAgent: ua,
@@ -21,7 +21,7 @@ angular.module("ng.deviceDetector",[])
 					firefox:/\Firefox\b/.test(ua),
 					safari:/^((?!CriOS).)*\Safari\b.*$/.test(ua),
 					opera:/\Opera\b/.test(ua),
-					ie:/\bMSIE\b/.test(ua) || /\Trident\b/.test(ua),
+					ie:/\bMSIE\b/.test(ua) || /\Trident\b/.test(ua)
 				},
 				device:{
 					android:/\bAndroid\b/.test(ua),
@@ -59,7 +59,7 @@ angular.module("ng.deviceDetector",[])
 .directive('deviceDetector', ["deviceDetector",function (deviceDetector) {
 	return {
 		restrict: "A",
-		link: function (scope, elm, attrs) {
+		link: function (scope, elm/*, attrs*/) {
 			elm.addClass('os-'+deviceDetector.os);
 			elm.addClass('browser-'+deviceDetector.browser);
 			elm.addClass('device-'+deviceDetector.device);

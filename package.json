@@ -2,8 +2,8 @@
     "name": "ng-device-detector",
     "version": "0.0.1",
     "devDependencies": {
-        "karma": "~0.12",
-        "karma-jasmine": "^0.1.5",
+        "karma": "*",
+        "karma-jasmine": "*",
         "karma-phantomjs-launcher": "*",
         "angular": "*",
         "angular-mocks": "*",
