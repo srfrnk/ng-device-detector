@@ -11,7 +11,7 @@ module.exports = function (config) {
             'node_modules/angular/angular.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'ng-device-detector.js',
-            'test/unit.js'
+            'test/*.js'
         ],
 
         // list of files / patterns to exclude
