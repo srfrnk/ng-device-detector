@@ -6,14 +6,17 @@ angular.module("ng.deviceDetector",[])
     FIREFOX: "firefox",
     SAFARI: "safari",
     OPERA: "opera",
-    IE: "ie"
+    IE: "ie",
+    UNKNOWN: "unknown"
 })
 .constant("DEVICES", {
     ANDROID: "android",
+    IPAD: "ipad",
     IPHONE: "iphone",
     IPOD: "ipod",
     BLACKBERRY: "blackberry",
-    FIREFOXOS: "firefoxos"
+    FIREFOXOS: "firefoxos",
+    UNKNOWN: "unknown"
 })
 .constant("OS", {
     WINDOWS: "windows",
@@ -22,7 +25,8 @@ angular.module("ng.deviceDetector",[])
     ANDROID: "android",
     LINUX: "linux",
     UNIX: "unix",
-    FIREFOXOS: "firefoxos"
+    FIREFOXOS: "firefoxos",
+    UNKNOWN: "unknown"
 })
 .service("detectUtils", ["deviceDetector", "DEVICES", "BROWSERS", "OS",
     function(deviceDetector, DEVICES, BROWSERS, OS) {
@@ -41,9 +45,10 @@ angular.module("ng.deviceDetector",[])
         }
     }
 ])
-.factory("deviceDetector", ["$window",
-	function ($window) {
+.factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS",
+	function ($window, DEVICES, BROWSERS, OS) {
 		var ua=$window.navigator.userAgent;
+
 		var deviceInfo = {
 		    raw: {
 		        userAgent: ua,
@@ -74,24 +79,24 @@ angular.module("ng.deviceDetector",[])
 			}
 		};
 
-	    deviceInfo.os = deviceInfo.raw.os.windows ? "windows" :
-        	(deviceInfo.raw.os.ios ? "ios" :
-	        	(deviceInfo.raw.os.mac ? "mac" :
-		            (deviceInfo.raw.os.android ? "android" :
-		                (deviceInfo.raw.os.unix ? "unix" :
-		                    (deviceInfo.raw.os.linux ? "linux" :
-		                        (deviceInfo.raw.os.firefoxos ? "firefoxos" : "unknown"))))));
-	    deviceInfo.browser = deviceInfo.raw.browser.ie ? "ie" :
-	        (deviceInfo.raw.browser.opera ? "opera" :
-	            (deviceInfo.raw.browser.chrome ? "chrome" :
-	                (deviceInfo.raw.browser.firefox ? "firefox" :
-	                    (deviceInfo.raw.browser.safari ? "safari" : "unknown"))));
-	    deviceInfo.device = deviceInfo.raw.device.android ? "android" :
-	        (deviceInfo.raw.device.iphone ? "iphone" :
-	            (deviceInfo.raw.device.ipad ? "ipad" :
-		            (deviceInfo.raw.device.ipod ? "ipod" :
-		                (deviceInfo.raw.device.blackberry ? "blackberry" :
-		                    (deviceInfo.raw.device.firefoxos ? "firefoxos" : "unknown")))));
+	    deviceInfo.os = deviceInfo.raw.os.windows ? OS.WINDOWS :
+        	(deviceInfo.raw.os.ios ? OS.IOS :
+	        	(deviceInfo.raw.os.mac ? OS.MAC :
+		            (deviceInfo.raw.os.android ? OS.ANDROID :
+		                (deviceInfo.raw.os.unix ? OS.UNIX :
+		                    (deviceInfo.raw.os.linux ? OS.LINUX :
+		                        (deviceInfo.raw.os.firefoxos ? OS.FIREFOXOS : OS.UNKNOWN))))));
+	    deviceInfo.browser = deviceInfo.raw.browser.ie ? BROWSERS.IE :
+	        (deviceInfo.raw.browser.opera ? BROWSERS.OPERA :
+	            (deviceInfo.raw.browser.chrome ? BROWSERS.CHROME :
+	                (deviceInfo.raw.browser.firefox ? BROWSERS.FIREFOX :
+	                    (deviceInfo.raw.browser.safari ? BROWSERS.SAFARI : BROWSERS.UNKNOWN))));
+	    deviceInfo.device = deviceInfo.raw.device.android ? DEVICES.ANDROID :
+	        (deviceInfo.raw.device.iphone ? DEVICES.IPHONE :
+	            (deviceInfo.raw.device.ipad ? DEVICES.IPAD :
+		            (deviceInfo.raw.device.ipod ? DEVICES.IPOD :
+		                (deviceInfo.raw.device.blackberry ? DEVICES.BLACKBERRY :
+		                    (deviceInfo.raw.device.firefoxos ? DEVICES.FIREFOXOS : DEVICES.UNKNOWN)))));
 	    
 		return deviceInfo;
 	}
