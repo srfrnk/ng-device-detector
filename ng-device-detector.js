@@ -1,6 +1,46 @@
 (function(angular) {
 "use strict";
 angular.module("ng.deviceDetector",[])
+.constant("BROWSERS", {
+    CHROME: "chrome",
+    FIREFOX: "firefox",
+    SAFARI: "safari",
+    OPERA: "opera",
+    IE: "ie"
+})
+.constant("DEVICES", {
+    ANDROID: "android",
+    IPHONE: "iphone",
+    IPOD: "ipod",
+    BLACKBERRY: "blackberry",
+    FIREFOXOS: "firefoxos"
+})
+.constant("OS", {
+    WINDOWS: "windows",
+    MAC: "mac",
+    IOS: "ios",
+    ANDROID: "android",
+    LINUX: "linux",
+    UNIX: "unix",
+    FIREFOXOS: "firefoxos"
+})
+.service("detectUtils", ["deviceDetector", "DEVICES", "BROWSERS", "OS",
+    function(deviceDetector, DEVICES, BROWSERS, OS) {
+        var deviceInfo = deviceDetector;
+
+        this.isMobile = function () {
+            return deviceInfo.device !== 'unknown';
+        };
+
+        this.isAndroid = function(){
+            return (deviceInfo.device === DEVICES.ANDROID || deviceInfo.OS === OS.ANDROID);
+        }
+
+        this.isIOS = function(){
+            return (deviceInfo.os === OS.IOS || deviceInfo.device === DEVICES.IPOD || deviceInfo.device === DEVICES.IPHONE);
+        }
+    }
+])
 .factory("deviceDetector", ["$window",
 	function ($window) {
 		var ua=$window.navigator.userAgent;
