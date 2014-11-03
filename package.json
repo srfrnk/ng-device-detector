@@ -1,6 +1,6 @@
 {
     "name": "ng-device-detector",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "devDependencies": {
         "karma": "*",
         "karma-jasmine": "*",
