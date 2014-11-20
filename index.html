@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Ng-device-detector by srfrnk</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Ng-device-detector</h1>
+        <h2>Angular module to detect OS / Browser / Device</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/srfrnk/ng-device-detector/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/srfrnk/ng-device-detector/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/srfrnk/ng-device-detector" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="ng-device-detector" class="anchor" href="#ng-device-detector" aria-hidden="true"><span class="octicon octicon-link"></span></a>ng-device-detector</h1>
+
+<h2>
+<a id="angular-module-to-detect-os--browser--device" class="anchor" href="#angular-module-to-detect-os--browser--device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Angular module to detect OS / Browser / Device</h2>
+
+<p><a href="https://travis-ci.org/srfrnk/ng-device-detector"><img src="https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master" alt="Build Status"></a></p>
+
+<p>Uses user-agent to set css classes or directly usable via JS.</p>
+
+<h3>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h3>
+
+<ul>
+<li>Run $ bower install ng-device-detector --save</li>
+<li>Add script load to HTML:<code>&lt;script type="text/javascript" src=".../ng-device-detector.js"&gt;&lt;/script&gt;</code>
+</li>
+<li>Add module to your app dependencies: <code>...angular.module("...", [..."ng.deviceDetector"...])...</code>
+</li>
+<li>To add classes - add directive like so- <code>&lt;div ... device-detector ...&gt;</code>
+</li>
+<li>To use directly add <code>"deviceDetector"</code> service to your injectors...</li>
+</ul>
+
+<h3>
+<a id="devicedetector-service" class="anchor" href="#devicedetector-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>deviceDetector service</h3>
+
+<p>Holds the following properties:</p>
+
+<ul>
+<li>raw : object : contains the raw values... for internal use mostly.</li>
+<li>os : string : name of current OS</li>
+<li>browser : string : name of current browser</li>
+<li>device : string : name of current device</li>
+</ul>
+
+<h3>
+<a id="support" class="anchor" href="#support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h3>
+
+<p>At first I added just major browser, OS, device support.
+With help from mariendries,javierprovecho and crisandretta more support was added.
+<a href="https://github.com/srfrnk/ng-device-detector/blob/master/ng-device-detector.js">The current list of supported browser,OS, device can be easily viewed in here</a>.</p>
+
+<p>Pull-requests with new stuff will be highly appreciated :)</p>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<p>See <a href="http://plnkr.co/edit/urqMI1?p=preview">plunker</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
