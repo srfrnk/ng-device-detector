@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master)](https://travis-ci.org/srfrnk/ng-device-detector)
 
 Uses user-agent to set css classes or directly usable via JS.
+See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.io/ng-device-detector)
 
 ### Install
 * Run $ bower install ng-device-detector --save
