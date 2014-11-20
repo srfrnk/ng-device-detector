@@ -31,3 +31,6 @@ Pull-requests with new stuff will be highly appreciated :)
 
 See [plunker](http://plnkr.co/edit/urqMI1?p=preview)
 
+### License
+
+[MIT License](//github.com/srfrnk/ng-device-detector/blob/master/license.txt)
