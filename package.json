@@ -1,13 +1,18 @@
 {
     "name": "ng-device-detector",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "devDependencies": {
         "karma": "*",
         "karma-jasmine": "*",
         "karma-phantomjs-launcher": "*",
         "angular": "*",
         "angular-mocks": "*",
-        "karma-nested-reporter": "*"
+        "karma-nested-reporter": "*",
+        "uglify-js":"*",
+        "gulp":"*",
+        "gulp-uglify":"*",
+        "gulp-concat":"*",
+        "gulp-karma":"*"
     },
     "scripts": {
         "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"

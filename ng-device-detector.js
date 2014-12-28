@@ -7,6 +7,8 @@ angular.module("ng.deviceDetector",[])
     SAFARI: "safari",
     OPERA: "opera",
     IE: "ie",
+    PS4: "ps4",
+    VITA: "vita",
     UNKNOWN: "unknown"
 })
 .constant("DEVICES", {
@@ -17,6 +19,8 @@ angular.module("ng.deviceDetector",[])
     BLACKBERRY: "blackberry",
     FIREFOXOS: "firefoxos",
     WINDOWSPHONE: "windows-phone",
+	PS4: "ps4",
+    VITA: "vita",
     UNKNOWN: "unknown"
 })
 .constant("OS", {
@@ -28,6 +32,8 @@ angular.module("ng.deviceDetector",[])
     UNIX: "unix",
     FIREFOXOS: "firefoxos",
     WINDOWSPHONE: "windows-phone",
+	PS4: "ps4",
+    VITA: "vita",
     UNKNOWN: "unknown"
 })
 .service("detectUtils", ["deviceDetector", "DEVICES", "BROWSERS", "OS",
@@ -68,12 +74,16 @@ angular.module("ng.deviceDetector",[])
 		deviceInfo.raw.os[OS.UNIX]=/\bUNIX\b/.test(ua);
 		deviceInfo.raw.os[OS.FIREFOXOS]=/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua);
 		deviceInfo.raw.os[OS.WINDOWSPHONE]=/\bIEMobile\b/.test(ua);
+		deviceInfo.raw.os[OS.PS4]=/\bMozilla\/5.0 \(PlayStation 4\b/.test(ua),
+        deviceInfo.raw.os[OS.VITA]=/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/.test(ua),
 
 		deviceInfo.raw.browser[BROWSERS.CHROME]=/\bChrome\b/.test(ua) || /\bCriOS\b/.test(ua);
 		deviceInfo.raw.browser[BROWSERS.FIREFOX]=/\Firefox\b/.test(ua);
 		deviceInfo.raw.browser[BROWSERS.SAFARI]=/^((?!CriOS).)*\Safari\b.*$/.test(ua);
 		deviceInfo.raw.browser[BROWSERS.OPERA]=/\Opera\b/.test(ua);
 		deviceInfo.raw.browser[BROWSERS.IE]=/\bMSIE\b/.test(ua) || /\Trident\b/.test(ua);
+		deviceInfo.raw.browser[BROWSERS.PS4]=/\bMozilla\/5.0 \(PlayStation 4\b/.test(ua),
+		deviceInfo.raw.browser[BROWSERS.VITA]=/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/.test(ua),
 
 		deviceInfo.raw.device[DEVICES.ANDROID]=/\bAndroid\b/.test(ua);
 		deviceInfo.raw.device[DEVICES.IPAD]=/\biPad\b/.test(ua);
@@ -82,6 +92,8 @@ angular.module("ng.deviceDetector",[])
 		deviceInfo.raw.device[DEVICES.BLACKBERRY]=/\bblackberry\b/.test(ua);
 		deviceInfo.raw.device[DEVICES.FIREFOXOS]=/\bFirefox\b/.test(ua) && /\Mobile\b/.test(ua);
 		deviceInfo.raw.device[DEVICES.WINDOWSPHONE]=/\bIEMobile\b/.test(ua);
+		deviceInfo.raw.device[DEVICES.PS4]=/\bMozilla\/5.0 \(PlayStation 4\b/.test(ua),
+        deviceInfo.raw.device[DEVICES.VITA]=/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/.test(ua),
 
 		deviceInfo.os = [
 			OS.WINDOWS,
@@ -91,7 +103,9 @@ angular.module("ng.deviceDetector",[])
 			OS.LINUX,
 			OS.UNIX,
 			OS.FIREFOXOS,
-			OS.WINDOWSPHONE
+			OS.WINDOWSPHONE,
+			OS.PS4,
+			OS.VITA
 			].reduce(function(previousValue, currentValue) {
 			return (previousValue===OS.UNKNOWN && deviceInfo.raw.os[currentValue])? currentValue : previousValue;
 		},OS.UNKNOWN);
@@ -101,7 +115,9 @@ angular.module("ng.deviceDetector",[])
 			BROWSERS.FIREFOX,
 			BROWSERS.SAFARI,
 			BROWSERS.OPERA,
-			BROWSERS.IE
+			BROWSERS.IE,
+			BROWSERS.PS4,
+			BROWSERS.VITA
 		].reduce(function(previousValue, currentValue) {
 			return (previousValue===BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue])? currentValue : previousValue;
 		},BROWSERS.UNKNOWN);
@@ -113,7 +129,10 @@ angular.module("ng.deviceDetector",[])
 			DEVICES.IPOD,
 			DEVICES.BLACKBERRY,
 			DEVICES.FIREFOXOS,
-			DEVICES.WINDOWSPHONE
+			DEVICES.WINDOWSPHONE,
+			DEVICES.PS4,
+			DEVICES.VITA
+
 		].reduce(function(previousValue, currentValue) {
 			return (previousValue===DEVICES.UNKNOWN && deviceInfo.raw.device[currentValue])? currentValue : previousValue;
 		},DEVICES.UNKNOWN);
