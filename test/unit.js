@@ -41,7 +41,7 @@ describe("ng-device-detector", function () {
 
     describe("with user-agent", function () {
 
-        function describeUserAgent(userAgent,os,browser,device) {
+        function describeUserAgent(userAgent,os,browser,device,isMobile,isTablet,isDesktop) {
             describe(userAgent, function () {
                 beforeEach(function () {
                     loadDetector(userAgent);
@@ -56,53 +56,63 @@ describe("ng-device-detector", function () {
                 it("should detect device = "+device, function () {
                     expect(deviceDetector.device).toBe(device);
                 });
+
+                it("should have isMobile = "+isMobile, function () {
+                    expect(deviceDetector.isMobile()).toBe(isMobile);
+                });
+                it("should have isTablet = "+isTablet, function () {
+                    expect(deviceDetector.isTablet()).toBe(isTablet);
+                });
+                it("should have isDesktop = "+isDesktop, function () {
+                    expect(deviceDetector.isDesktop()).toBe(isDesktop);
+                });
             });
         }
 
         // Chrome
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows","chrome","unknown");
+            "windows","chrome","unknown",false,false,true);
 
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
-            "mac","chrome","unknown");
+            "mac","chrome","unknown",false,false,true);
 
         describeUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21",
-            "linux","chrome","unknown");
+            "linux","chrome","unknown",false,false,true);
 
 
         // Firefox
         describeUserAgent("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
-            "windows","firefox","unknown");
+            "windows","firefox","unknown",false,false,true);
 
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:25.0) Gecko/20100101 Firefox/25.0",
-            "mac","firefox","unknown");
+            "mac","firefox","unknown",false,false,true);
 
         describeUserAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0",
-            "linux","firefox","unknown");
+            "linux","firefox","unknown",false,false,true);
 
         // Safari
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25",
-            "ios","safari","ipad");
+            "ios","safari","ipad",true,true,false);
 
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
-            "mac","safari","unknown");
+            "mac","safari","unknown",false,false,true);
 
         describeUserAgent("Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+",
-            "linux","safari","unknown");
+            "linux","safari","unknown",false,false,true);
 
 
         // Issue #10
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/38.0.2125.59 Mobile/12A405 Safari/600.1.4 (000767)",
-            "ios","chrome","ipad");
+            "ios","chrome","ipad",true,true,false);
 		
         // Issue #14
         describeUserAgent("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)",
-            "windows-phone","ie","windows-phone");
+            "windows-phone","ie","windows-phone",true,false,false);
 
 		// Issue #15
         describeUserAgent("Mozilla/5.0 (PlayStation 4 1.52) AppleWebKit/536.26 (KHTML, like Gecko)",
-            "ps4","ps4","ps4");
+            "ps4","ps4","ps4",false,false,true);
         describeUserAgent("Mozilla/5.0 (Playstation Vita 1.61) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
-            "vita","vita","vita");
+            "vita","vita","vita",true,false,false);
     });
 });

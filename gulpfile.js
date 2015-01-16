@@ -21,3 +21,7 @@ gulp.task('test', function (done) {
     singleRun: true
   }, done);
 });
+
+gulp.task('watch', [], function () {
+  gulp.watch(["**/*.js"], ["test","minify"]);
+});
