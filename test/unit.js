@@ -104,7 +104,7 @@ describe("ng-device-detector", function () {
         // Issue #10
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/38.0.2125.59 Mobile/12A405 Safari/600.1.4 (000767)",
             "ios","chrome","ipad",true,true,false);
-		
+
         // Issue #14
         describeUserAgent("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)",
             "windows-phone","ie","windows-phone",true,false,false);
