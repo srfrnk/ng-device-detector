@@ -73,7 +73,7 @@
             function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS) {
 
                 var OS_RE = {
-                    WINDOWS: {and: [{or:[/\bWindows|(Win\d\d)\b/,/\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
+                    WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
                     MAC: /\bMac OS\b/,
                     IOS: {or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]},
                     ANDROID: /\bAndroid\b/,
@@ -90,7 +90,7 @@
                     FIREFOX: /\bFirefox\b/,
                     SAFARI: /^((?!CriOS).)*\Safari\b.*$/,
                     OPERA: /Opera\b/,
-                    IE: {and: [/\bMSIE\b/, /\bTrident\b/]},
+                    IE: /\bMSIE\b/,
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
@@ -122,6 +122,19 @@
                     WINDOWS_8: /(Windows 8|Windows NT 6.2)/,
                     WINDOWS_NT_4_0: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/
                 };
+
+                var BROWSER_VERSIONS_RE_MAP = {
+                    CHROME:/\bChrome\/([\d\.]+)\b/,
+                    FIREFOX:/\bFirefox\/([\d\.]+)\b/,
+                    SAFARI:/\bVersion\/([\d\.]+)\b/,
+                    OPERA:/\bVersion\/([\d\.]+)\b/,
+                    IE:/\bMSIE ([\d\.]+\w?)\b/
+                };
+
+                var BROWSER_VERSIONS_RE = Object.keys(BROWSER_VERSIONS_RE_MAP).reduce(function (obj, key) {
+                    obj[BROWSERS[key]]=BROWSER_VERSIONS_RE_MAP[key];
+                    return obj;
+                },{});
 
                 function test(string, regex) {
                     if (regex instanceof RegExp) {
@@ -234,6 +247,17 @@
                 ].reduce(function (previousValue, currentValue) {
                         return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
                     }, OS_VERSIONS.UNKNOWN);
+
+                deviceInfo.browser_version = "0"
+                if (deviceInfo.browser !== BROWSERS.UNKNOWN) {
+                    var re = BROWSER_VERSIONS_RE[deviceInfo.browser];
+                    if (!!re) {
+                        var exec = re.exec(ua);
+                        if (!!exec) {
+                            deviceInfo.browser_version = exec[1];
+                        }
+                    }
+                }
 
                 deviceInfo.isMobile = function () {
                     return [

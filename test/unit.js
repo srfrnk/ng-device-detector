@@ -45,7 +45,7 @@ describe("ng-device-detector", function () {
 
     describe("with user-agent", function () {
 
-        function describeUserAgent(userAgent, os, os_version, browser, device, isMobile, isTablet, isDesktop) {
+        function describeUserAgent(userAgent, os, os_version, browser, browser_version, device, isMobile, isTablet, isDesktop) {
             describe(userAgent, function () {
                 beforeEach(function () {
                     loadDetector(userAgent);
@@ -59,6 +59,9 @@ describe("ng-device-detector", function () {
                 });
                 it("should detect browser = " + browser, function () {
                     expect(deviceDetector.browser).toBe(browser);
+                });
+                it("should detect browser version= " + browser_version, function () {
+                    expect(deviceDetector.browser_version).toBe(browser_version);
                 });
                 it("should detect device = " + device, function () {
                     expect(deviceDetector.device).toBe(device);
@@ -75,113 +78,105 @@ describe("ng-device-detector", function () {
             });
         }
 
-        // Chrome
+// Chrome
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-8-1", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-8-1", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
-            "mac", "unknown", "chrome", "unknown", false, false, true);
-
+            "mac", "unknown", "chrome", "32.0.1664.3", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21",
-            "linux", "unknown", "chrome", "unknown", false, false, true);
+            "linux", "unknown", "chrome", "19.0.1042.0", "unknown", false, false, true);
 
-        // Firefox
+// Firefox
         describeUserAgent("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
-            "windows", "windows-xp", "firefox", "unknown", false, false, true);
-
+            "windows", "windows-xp", "firefox", "31.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:25.0) Gecko/20100101 Firefox/25.0",
-            "mac", "unknown", "firefox", "unknown", false, false, true);
-
+            "mac", "unknown", "firefox", "25.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0",
-            "linux", "unknown", "firefox", "unknown", false, false, true);
+            "linux", "unknown", "firefox", "24.0", "unknown", false, false, true);
 
-        // Safari
+// Safari
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25",
-            "ios", "unknown", "safari", "ipad", true, true, false);
-
+            "ios", "unknown", "safari", "6.0", "ipad", true, true, false);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
-            "mac", "unknown", "safari", "unknown", false, false, true);
-
+            "mac", "unknown", "safari", "5.1.7", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+",
-            "linux", "unknown", "safari", "unknown", false, false, true);
+            "linux", "unknown", "safari", "5.0", "unknown", false, false, true);
 
-        // Issue #10
+// Issue #10
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/38.0.2125.59 Mobile/12A405 Safari/600.1.4 (000767)",
-            "ios", "unknown", "chrome", "ipad", true, true, false);
+            "ios", "unknown", "chrome", "0", "ipad", true, true, false);
 
-        // Issue #14
+// Issue #14
         describeUserAgent("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)",
-            "windows-phone", "unknown", "ie", "windows-phone", true, false, false);
+            "windows-phone", "unknown", "ie", "9.0", "windows-phone", true, false, false);
 
-        // Issue #15
+// Issue #15
         describeUserAgent("Mozilla/5.0 (PlayStation 4 1.52) AppleWebKit/536.26 (KHTML, like Gecko)",
-            "ps4", "unknown", "ps4", "ps4", false, false, true);
+            "ps4", "unknown", "ps4", "0", "ps4", false, false, true);
         describeUserAgent("Mozilla/5.0 (Playstation Vita 1.61) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
-            "vita", "unknown", "vita", "vita", true, false, false);
+            "vita", "unknown", "vita", "0", "vita", true, false, false);
 
-        // Issue #18
+// Issue #18
         describeUserAgent("Mozilla/5.0 (Win16; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-3-11", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-3-11", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 95; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-95", "chrome", "unknown", false, false, true);
+            "windows", "windows-95", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Win95; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-95", "chrome", "unknown", false, false, true);
+            "windows", "windows-95", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows_95; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-95", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-95", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Win 9x 4.90; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-me", "chrome", "unknown", false, false, true);
+            "windows", "windows-me", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows ME; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-me", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-me", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 98; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-98", "chrome", "unknown", false, false, true);
+            "windows", "windows-98", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Win98; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-98", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-98", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows CE; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-ce", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-ce", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 5.0; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-2000", "chrome", "unknown", false, false, true);
+            "windows", "windows-2000", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 2000; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-2000", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-2000", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 5.1; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-xp", "chrome", "unknown", false, false, true);
+            "windows", "windows-xp", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows XP; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-xp", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-xp", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 5.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-server-2003", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-server-2003", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-vista", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-vista", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-7", "chrome", "unknown", false, false, true);
+            "windows", "windows-7", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 7; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-7", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-7", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-8-1", "chrome", "unknown", false, false, true);
+            "windows", "windows-8-1", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 8.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-8-1", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-8-1", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-8", "chrome", "unknown", false, false, true);
+            "windows", "windows-8", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows 8; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-8", "chrome", "unknown", false, false, true);
-
+            "windows", "windows-8", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT 4.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-nt-4-0", "chrome", "unknown", false, false, true);
+            "windows", "windows-nt-4-0", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (WinNT4.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-nt-4-0", "chrome", "unknown", false, false, true);
+            "windows", "windows-nt-4-0", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (WinNT; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-nt-4-0", "chrome", "unknown", false, false, true);
+            "windows", "windows-nt-4-0", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows NT; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
-            "windows", "windows-nt-4-0", "chrome", "unknown", false, false, true);
+            "windows", "windows-nt-4-0", "chrome", "37.0.2049.0", "unknown", false, false, true);
 
+        describeUserAgent("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 4.0)",
+            "windows", "windows-nt-4-0", "ie", "6.0", "unknown", false, false, true);
+        describeUserAgent("Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 4.0)",
+            "windows", "windows-nt-4-0", "ie", "6.0b", "unknown", false, false, true);
+        describeUserAgent("Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 4.0)",
+            "windows", "windows-nt-4-0", "ie", "7.0", "unknown", false, false, true);
+        describeUserAgent("Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 4.0)",
+            "windows", "windows-nt-4-0", "ie", "10.0", "unknown", false, false, true);
+        describeUserAgent("Mozilla/4.0 (compatible; MSIE 11; Windows NT 4.0)",
+            "windows", "windows-nt-4-0", "ie", "11", "unknown", false, false, true);
     });
 });
