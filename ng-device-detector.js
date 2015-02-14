@@ -36,6 +36,22 @@
             VITA: "vita",
             UNKNOWN: "unknown"
         })
+        .constant("OS_VERSIONS", {
+            WINDOWS_3_11: "windows-3-11",
+            WINDOWS_95: "windows-95",
+            WINDOWS_ME: "windows-me",
+            WINDOWS_98: "windows-98",
+            WINDOWS_CE: "windows-ce",
+            WINDOWS_2000: "windows-2000",
+            WINDOWS_XP: "windows-xp",
+            WINDOWS_SERVER_2003: "windows-server-2003",
+            WINDOWS_VISTA: "windows-vista",
+            WINDOWS_7: "windows-7",
+            WINDOWS_8_1: "windows-8-1",
+            WINDOWS_8: "windows-8",
+            WINDOWS_NT_4_0: "windows-nt-4-0",
+            UNKNOWN: "unknown"
+        })
         .service("detectUtils", ["deviceDetector", "DEVICES", "BROWSERS", "OS",
             function (deviceDetector, DEVICES, BROWSERS, OS) {
                 var deviceInfo = deviceDetector;
@@ -53,42 +69,58 @@
                 };
             }
         ])
-        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS",
-            function ($window, DEVICES, BROWSERS, OS) {
+        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS", "OS_VERSIONS",
+            function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS) {
 
-                var OS_RE={
-                    WINDOWS:{and:[/\bWindows\b/,{not:/\bWindows Phone\b/}]},
-                    MAC:/\bMac OS\b/,
-                    IOS:{or:[/\biPad\b/,/\biPhone\b/,/\biPod\b/]},
-                    ANDROID:/\bAndroid\b/,
-                    LINUX:/\bLinux\b/,
-                    UNIX:/\bUNIX\b/,
-                    FIREFOXOS:{and:[/\bFirefox\b/,/Mobile\b/]},
-                    WINDOWSPHONE:/\bIEMobile\b/,
-                    PS4:/\bMozilla\/5.0 \(PlayStation 4\b/,
-                    VITA:/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
+                var OS_RE = {
+                    WINDOWS: {and: [{or:[/\bWindows|(Win\d\d)\b/,/\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
+                    MAC: /\bMac OS\b/,
+                    IOS: {or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]},
+                    ANDROID: /\bAndroid\b/,
+                    LINUX: /\bLinux\b/,
+                    UNIX: /\bUNIX\b/,
+                    FIREFOXOS: {and: [/\bFirefox\b/, /Mobile\b/]},
+                    WINDOWSPHONE: /\bIEMobile\b/,
+                    PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
+                    VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
-                var BROWSERS_RE={
-                    CHROME:{or:[/\bChrome\b/,/\bCriOS\b/]},
-                    FIREFOX:/\bFirefox\b/,
-                    SAFARI:/^((?!CriOS).)*\Safari\b.*$/,
-                    OPERA:/Opera\b/,
-                    IE:{and:[/\bMSIE\b/,/\bTrident\b/]},
-                    PS4:/\bMozilla\/5.0 \(PlayStation 4\b/,
-                    VITA:/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
+                var BROWSERS_RE = {
+                    CHROME: {or: [/\bChrome\b/, /\bCriOS\b/]},
+                    FIREFOX: /\bFirefox\b/,
+                    SAFARI: /^((?!CriOS).)*\Safari\b.*$/,
+                    OPERA: /Opera\b/,
+                    IE: {and: [/\bMSIE\b/, /\bTrident\b/]},
+                    PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
+                    VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
-                var DEVICES_RE={
-                    ANDROID:/\bAndroid\b/,
-                    IPAD:/\biPad\b/,
-                    IPHONE:/\biPhone\b/,
-                    IPOD:/\biPod\b/,
-                    BLACKBERRY:/\bblackberry\b/,
-                    FIREFOXOS:{and:[/\bFirefox\b/,/\bMobile\b/]},
-                    WINDOWSPHONE:/\bIEMobile\b/,
-                    PS4:/\bMozilla\/5.0 \(PlayStation 4\b/,
-                    VITA:/\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
+                var DEVICES_RE = {
+                    ANDROID: /\bAndroid\b/,
+                    IPAD: /\biPad\b/,
+                    IPHONE: /\biPhone\b/,
+                    IPOD: /\biPod\b/,
+                    BLACKBERRY: /\bblackberry\b/,
+                    FIREFOXOS: {and: [/\bFirefox\b/, /\bMobile\b/]},
+                    WINDOWSPHONE: /\bIEMobile\b/,
+                    PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
+                    VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
+                };
+
+                var OS_VERSIONS_RE = {
+                    WINDOWS_3_11: /Win16/,
+                    WINDOWS_95: /(Windows 95|Win95|Windows_95)/,
+                    WINDOWS_ME: /(Win 9x 4.90|Windows ME)/,
+                    WINDOWS_98: /(Windows 98|Win98)/,
+                    WINDOWS_CE: /Windows CE/,
+                    WINDOWS_2000: /(Windows NT 5.0|Windows 2000)/,
+                    WINDOWS_XP: /(Windows NT 5.1|Windows XP)/,
+                    WINDOWS_SERVER_2003: /Windows NT 5.2/,
+                    WINDOWS_VISTA: /Windows NT 6.0/,
+                    WINDOWS_7: /(Windows 7|Windows NT 6.1)/,
+                    WINDOWS_8_1: /(Windows 8.1|Windows NT 6.3)/,
+                    WINDOWS_8: /(Windows 8|Windows NT 6.2)/,
+                    WINDOWS_NT_4_0: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/
                 };
 
                 function test(string, regex) {
@@ -97,16 +129,16 @@
                     }
                     else if (regex && Array.isArray(regex.and)) {
                         return regex.and.every(function (item) {
-                            return test(string,item);
+                            return test(string, item);
                         });
                     }
                     else if (regex && Array.isArray(regex.or)) {
                         return regex.or.some(function (item) {
-                            return test(string,item);
+                            return test(string, item);
                         });
                     }
                     else if (regex && regex.not) {
-                        return !test(string,regex.not);
+                        return !test(string, regex.not);
                     }
                     else {
                         return false;
@@ -124,20 +156,25 @@
                     }
                 };
 
-                deviceInfo.raw.os=Object.keys(OS).reduce(function (obj,item) {
-                    obj[OS[item]]=test(ua,OS_RE[item]);
+                deviceInfo.raw.os = Object.keys(OS).reduce(function (obj, item) {
+                    obj[OS[item]] = test(ua, OS_RE[item]);
                     return obj;
-                },{});
+                }, {});
 
-                deviceInfo.raw.browser=Object.keys(BROWSERS).reduce(function (obj,item) {
-                    obj[BROWSERS[item]]=test(ua,BROWSERS_RE[item]);
+                deviceInfo.raw.browser = Object.keys(BROWSERS).reduce(function (obj, item) {
+                    obj[BROWSERS[item]] = test(ua, BROWSERS_RE[item]);
                     return obj;
-                },{});
+                }, {});
 
-                deviceInfo.raw.device=Object.keys(DEVICES).reduce(function (obj,item) {
-                    obj[DEVICES[item]]=test(ua,DEVICES_RE[item]);
+                deviceInfo.raw.device = Object.keys(DEVICES).reduce(function (obj, item) {
+                    obj[DEVICES[item]] = test(ua, DEVICES_RE[item]);
                     return obj;
-                },{});
+                }, {});
+
+                deviceInfo.raw.os_version = Object.keys(OS_VERSIONS).reduce(function (obj, item) {
+                    obj[OS_VERSIONS[item]] = test(ua, OS_VERSIONS_RE[item]);
+                    return obj;
+                }, {});
 
                 deviceInfo.os = [
                     OS.WINDOWS,
@@ -179,6 +216,24 @@
                 ].reduce(function (previousValue, currentValue) {
                         return (previousValue === DEVICES.UNKNOWN && deviceInfo.raw.device[currentValue]) ? currentValue : previousValue;
                     }, DEVICES.UNKNOWN);
+
+                deviceInfo.os_version = [
+                    OS_VERSIONS.WINDOWS_3_11,
+                    OS_VERSIONS.WINDOWS_95,
+                    OS_VERSIONS.WINDOWS_ME,
+                    OS_VERSIONS.WINDOWS_98,
+                    OS_VERSIONS.WINDOWS_CE,
+                    OS_VERSIONS.WINDOWS_2000,
+                    OS_VERSIONS.WINDOWS_XP,
+                    OS_VERSIONS.WINDOWS_SERVER_2003,
+                    OS_VERSIONS.WINDOWS_VISTA,
+                    OS_VERSIONS.WINDOWS_7,
+                    OS_VERSIONS.WINDOWS_8_1,
+                    OS_VERSIONS.WINDOWS_8,
+                    OS_VERSIONS.WINDOWS_NT_4_0
+                ].reduce(function (previousValue, currentValue) {
+                        return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
+                    }, OS_VERSIONS.UNKNOWN);
 
                 deviceInfo.isMobile = function () {
                     return [
