@@ -128,7 +128,8 @@
                     FIREFOX:/\bFirefox\/([\d\.]+)\b/,
                     SAFARI:/\bVersion\/([\d\.]+)\b/,
                     OPERA:/\bVersion\/([\d\.]+)\b/,
-                    IE:/\bMSIE ([\d\.]+\w?)\b/
+                    IE:[/\bMSIE ([\d\.]+\w?)\b/, /\bTrident.*rv:([\d\.]+\w?)\b/]
+
                 };
 
                 var BROWSER_VERSIONS_RE = Object.keys(BROWSER_VERSIONS_RE_MAP).reduce(function (obj, key) {
@@ -252,10 +253,15 @@
                 if (deviceInfo.browser !== BROWSERS.UNKNOWN) {
                     var re = BROWSER_VERSIONS_RE[deviceInfo.browser];
                     if (!!re) {
-                        var exec = re.exec(ua);
-                        if (!!exec) {
-                            deviceInfo.browser_version = exec[1];
+                        var res = !Array.isArray(re) ? [re] : re;
+                        for(var i = 0, len = res.length; i < len ; i++){
+                            var exec = res[i].exec(ua);
+                            if (!!exec) {
+                                deviceInfo.browser_version = exec[1];
+                                break;
+                            }
                         }
+
                     }
                 }
 
