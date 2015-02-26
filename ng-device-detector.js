@@ -90,7 +90,7 @@
                     FIREFOX: /\bFirefox\b/,
                     SAFARI: /^((?!CriOS).)*\Safari\b.*$/,
                     OPERA: /Opera\b/,
-                    IE: /\bMSIE\b/,
+                    IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
