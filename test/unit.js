@@ -178,5 +178,11 @@ describe("ng-device-detector", function () {
             "windows", "windows-nt-4-0", "ie", "10.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/4.0 (compatible; MSIE 11; Windows NT 4.0)",
             "windows", "windows-nt-4-0", "ie", "11", "unknown", false, false, true);
+
+// Issue 21
+        describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko",
+            "windows", "windows-8-1", "ie", "11.0", "unknown", false, false, true);
+        describeUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; rv:11.0) like Gecko",
+            "windows", "windows-7", "ie", "11.0", "unknown", false, false, true);
     });
 });

@@ -128,7 +128,7 @@
                     FIREFOX:/\bFirefox\/([\d\.]+)\b/,
                     SAFARI:/\bVersion\/([\d\.]+)\b/,
                     OPERA:/\bVersion\/([\d\.]+)\b/,
-                    IE:/\bMSIE ([\d\.]+\w?)\b/
+                    IE:[/\bMSIE ([\d\.]+\w?)\b/,/\brv:([\d\.]+\w?)\b/]
                 };
 
                 var BROWSER_VERSIONS_RE = Object.keys(BROWSER_VERSIONS_RE_MAP).reduce(function (obj, key) {
@@ -155,6 +155,20 @@
                     }
                     else {
                         return false;
+                    }
+                }
+
+                function exec(string, regex) {
+                    if (regex instanceof RegExp) {
+                        return regex.exec(string);
+                    }
+                    else if (regex && Array.isArray(regex)) {
+                        return regex.reduce(function (res,item) {
+                            return (!!res)?res:exec(string, item);
+                        },null);
+                    }
+                    else {
+                        return null;
                     }
                 }
 
@@ -248,14 +262,12 @@
                         return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
                     }, OS_VERSIONS.UNKNOWN);
 
-                deviceInfo.browser_version = "0"
+                deviceInfo.browser_version = "0";
                 if (deviceInfo.browser !== BROWSERS.UNKNOWN) {
                     var re = BROWSER_VERSIONS_RE[deviceInfo.browser];
-                    if (!!re) {
-                        var exec = re.exec(ua);
-                        if (!!exec) {
-                            deviceInfo.browser_version = exec[1];
-                        }
+                    var res = exec(ua,re);
+                    if (!!res) {
+                        deviceInfo.browser_version = res[1];
                     }
                 }
 
