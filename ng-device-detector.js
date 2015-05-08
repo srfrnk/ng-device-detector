@@ -86,10 +86,10 @@
                 };
 
                 var BROWSERS_RE = {
-                    CHROME: {or: [/\bChrome\b/, /\bCriOS\b/]},
+                    CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:/\bOPR\b/}]},
                     FIREFOX: /\bFirefox\b/,
-                    SAFARI: /^((?!CriOS).)*\Safari\b.*$/,
-                    OPERA: /Opera\b/,
+                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:/\bOPR\b/}]},
+                    OPERA: {or:[/Opera\b/,/\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
@@ -127,7 +127,7 @@
                     CHROME:/\bChrome\/([\d\.]+)\b/,
                     FIREFOX:/\bFirefox\/([\d\.]+)\b/,
                     SAFARI:/\bVersion\/([\d\.]+)\b/,
-                    OPERA:/\bVersion\/([\d\.]+)\b/,
+                    OPERA:[/\bVersion\/([\d\.]+)\b/,/\bOPR\/([\d\.]+)\b/],
                     IE:[/\bMSIE ([\d\.]+\w?)\b/,/\brv:([\d\.]+\w?)\b/]
                 };
 
