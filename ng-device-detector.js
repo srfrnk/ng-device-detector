@@ -1,6 +1,6 @@
 (function (angular) {
     "use strict";
-    angular.module("ng.deviceDetector", [])
+    angular.module("ng.deviceDetector", ["reTree"])
         .constant("BROWSERS", {
             CHROME: "chrome",
             FIREFOX: "firefox",
@@ -69,8 +69,8 @@
                 };
             }
         ])
-        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS", "OS_VERSIONS",
-            function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS) {
+        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS", "OS_VERSIONS","reTree",
+            function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS,reTree) {
 
                 var OS_RE = {
                     WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
@@ -136,42 +136,6 @@
                     return obj;
                 },{});
 
-                function test(string, regex) {
-                    if (regex instanceof RegExp) {
-                        return regex.test(string);
-                    }
-                    else if (regex && Array.isArray(regex.and)) {
-                        return regex.and.every(function (item) {
-                            return test(string, item);
-                        });
-                    }
-                    else if (regex && Array.isArray(regex.or)) {
-                        return regex.or.some(function (item) {
-                            return test(string, item);
-                        });
-                    }
-                    else if (regex && regex.not) {
-                        return !test(string, regex.not);
-                    }
-                    else {
-                        return false;
-                    }
-                }
-
-                function exec(string, regex) {
-                    if (regex instanceof RegExp) {
-                        return regex.exec(string);
-                    }
-                    else if (regex && Array.isArray(regex)) {
-                        return regex.reduce(function (res,item) {
-                            return (!!res)?res:exec(string, item);
-                        },null);
-                    }
-                    else {
-                        return null;
-                    }
-                }
-
                 var ua = $window.navigator.userAgent;
 
                 var deviceInfo = {
@@ -184,22 +148,22 @@
                 };
 
                 deviceInfo.raw.os = Object.keys(OS).reduce(function (obj, item) {
-                    obj[OS[item]] = test(ua, OS_RE[item]);
+                    obj[OS[item]] = reTree.test(ua, OS_RE[item]);
                     return obj;
                 }, {});
 
                 deviceInfo.raw.browser = Object.keys(BROWSERS).reduce(function (obj, item) {
-                    obj[BROWSERS[item]] = test(ua, BROWSERS_RE[item]);
+                    obj[BROWSERS[item]] = reTree.test(ua, BROWSERS_RE[item]);
                     return obj;
                 }, {});
 
                 deviceInfo.raw.device = Object.keys(DEVICES).reduce(function (obj, item) {
-                    obj[DEVICES[item]] = test(ua, DEVICES_RE[item]);
+                    obj[DEVICES[item]] = reTree.test(ua, DEVICES_RE[item]);
                     return obj;
                 }, {});
 
                 deviceInfo.raw.os_version = Object.keys(OS_VERSIONS).reduce(function (obj, item) {
-                    obj[OS_VERSIONS[item]] = test(ua, OS_VERSIONS_RE[item]);
+                    obj[OS_VERSIONS[item]] = reTree.test(ua, OS_VERSIONS_RE[item]);
                     return obj;
                 }, {});
 
@@ -265,7 +229,7 @@
                 deviceInfo.browser_version = "0";
                 if (deviceInfo.browser !== BROWSERS.UNKNOWN) {
                     var re = BROWSER_VERSIONS_RE[deviceInfo.browser];
-                    var res = exec(ua,re);
+                    var res = reTree.exec(ua,re);
                     if (!!res) {
                         deviceInfo.browser_version = res[1];
                     }

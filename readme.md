@@ -8,6 +8,7 @@ See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.i
 
 ### Install
 * Run $ bower install ng-device-detector --save
+* Add script load to HTML:`<script type="text/javascript" src=".../re-tree.js"></script>`
 * Add script load to HTML:`<script type="text/javascript" src=".../ng-device-detector.js"></script>`
 * Add module to your app dependencies: `...angular.module("...", [..."ng.deviceDetector"...])...`
 * To add classes - add directive like so- `<div ... device-detector ...>`

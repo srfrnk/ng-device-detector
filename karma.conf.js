@@ -10,6 +10,7 @@ module.exports = function (config) {
         files: [
             'node_modules/angular/angular.js',
             'node_modules/angular-mocks/angular-mocks.js',
+            'node_modules/re-tree/re-tree.js',
             'ng-device-detector.js',
             'test/*.js'
         ],
