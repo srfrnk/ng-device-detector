@@ -25,5 +25,5 @@
   ],
   "dependencies": {
     "re-tree": ">=0.0.2"
-  },
+  }
 }
