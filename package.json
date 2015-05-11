@@ -1,6 +1,6 @@
 {
   "name": "ng-device-detector",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "devDependencies": {
     "karma": "*",
     "karma-jasmine": "*",
@@ -33,6 +33,6 @@
   },
   "homepage": "https://github.com/srfrnk/ng-device-detector",
   "dependencies": {
-    "re-tree": "0.0.1"
+    "re-tree": "^0.0.2"
   }
 }
