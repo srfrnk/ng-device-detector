@@ -108,7 +108,7 @@ describe("ng-device-detector", function () {
 
 // Issue #14
         describeUserAgent("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)",
-            "windows-phone", "unknown", "ie", "9.0", "windows-phone", true, false, false);
+            "windows-phone", "windows-phone-7-5", "ie", "9.0", "windows-phone", true, false, false);
 
 // Issue #15
         describeUserAgent("Mozilla/5.0 (PlayStation 4 1.52) AppleWebKit/536.26 (KHTML, like Gecko)",
@@ -188,5 +188,11 @@ describe("ng-device-detector", function () {
 // Issue 24
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36 OPR/29.0.1795.47",
             "windows", "windows-8-1", "opera", "29.0.1795.47", "unknown", false, false, true);
+
+// Issue 27
+        describeUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0",
+            "windows", "windows-10", "ms-edge", "12.0", "unknown", false, false, true);
+        describeUserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Safari/537.36 Edge/12.0",
+            "windows-phone", "windows-phone-10", "ms-edge", "12.0", "windows-phone", true, false, false);
     });
 });

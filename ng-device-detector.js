@@ -7,6 +7,7 @@
             SAFARI: "safari",
             OPERA: "opera",
             IE: "ie",
+            MS_EDGE: "ms-edge",
             PS4: "ps4",
             VITA: "vita",
             UNKNOWN: "unknown"
@@ -49,6 +50,9 @@
             WINDOWS_7: "windows-7",
             WINDOWS_8_1: "windows-8-1",
             WINDOWS_8: "windows-8",
+            WINDOWS_10: "windows-10",
+            WINDOWS_PHONE_7_5: "windows-phone-7-5",
+            WINDOWS_PHONE_10: "windows-phone-10",
             WINDOWS_NT_4_0: "windows-nt-4-0",
             UNKNOWN: "unknown"
         })
@@ -76,33 +80,34 @@
                     WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
                     MAC: /\bMac OS\b/,
                     IOS: {or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]},
-                    ANDROID: /\bAndroid\b/,
+                    ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     LINUX: /\bLinux\b/,
                     UNIX: /\bUNIX\b/,
                     FIREFOXOS: {and: [/\bFirefox\b/, /Mobile\b/]},
-                    WINDOWSPHONE: /\bIEMobile\b/,
+                    WINDOWSPHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
                 var BROWSERS_RE = {
-                    CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:/\bOPR\b/}]},
+                    CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
                     FIREFOX: /\bFirefox\b/,
-                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:/\bOPR\b/}]},
+                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
                     OPERA: {or:[/Opera\b/,/\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
+                    MS_EDGE: {or: [/\bEdge\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
                 var DEVICES_RE = {
-                    ANDROID: /\bAndroid\b/,
+                    ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     IPAD: /\biPad\b/,
                     IPHONE: /\biPhone\b/,
                     IPOD: /\biPod\b/,
                     BLACKBERRY: /\bblackberry\b/,
                     FIREFOXOS: {and: [/\bFirefox\b/, /\bMobile\b/]},
-                    WINDOWSPHONE: /\bIEMobile\b/,
+                    WINDOWSPHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
@@ -120,7 +125,10 @@
                     WINDOWS_7: /(Windows 7|Windows NT 6.1)/,
                     WINDOWS_8_1: /(Windows 8.1|Windows NT 6.3)/,
                     WINDOWS_8: /(Windows 8|Windows NT 6.2)/,
-                    WINDOWS_NT_4_0: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/
+                    WINDOWS_10: /(Windows NT 10.0)/,
+                    WINDOWS_PHONE_7_5: /(Windows Phone OS 7.5)/,
+                    WINDOWS_PHONE_10: /(Windows Phone 10)/,
+                    WINDOWS_NT_4_0: {and:[/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/,{not:/Windows NT 10.0/}]}
                 };
 
                 var BROWSER_VERSIONS_RE_MAP = {
@@ -128,7 +136,8 @@
                     FIREFOX:/\bFirefox\/([\d\.]+)\b/,
                     SAFARI:/\bVersion\/([\d\.]+)\b/,
                     OPERA:[/\bVersion\/([\d\.]+)\b/,/\bOPR\/([\d\.]+)\b/],
-                    IE:[/\bMSIE ([\d\.]+\w?)\b/,/\brv:([\d\.]+\w?)\b/]
+                    IE:[/\bMSIE ([\d\.]+\w?)\b/,/\brv:([\d\.]+\w?)\b/],
+                    MS_EDGE:/\bEdge\/([\d\.]+)\b/
                 };
 
                 var BROWSER_VERSIONS_RE = Object.keys(BROWSER_VERSIONS_RE_MAP).reduce(function (obj, key) {
@@ -188,6 +197,7 @@
                     BROWSERS.SAFARI,
                     BROWSERS.OPERA,
                     BROWSERS.IE,
+                    BROWSERS.MS_EDGE,
                     BROWSERS.PS4,
                     BROWSERS.VITA
                 ].reduce(function (previousValue, currentValue) {
@@ -221,6 +231,9 @@
                     OS_VERSIONS.WINDOWS_7,
                     OS_VERSIONS.WINDOWS_8_1,
                     OS_VERSIONS.WINDOWS_8,
+                    OS_VERSIONS.WINDOWS_10,
+                    OS_VERSIONS.WINDOWS_PHONE_7_5,
+                    OS_VERSIONS.WINDOWS_PHONE_10,
                     OS_VERSIONS.WINDOWS_NT_4_0
                 ].reduce(function (previousValue, currentValue) {
                         return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
