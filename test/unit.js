@@ -194,5 +194,9 @@ describe("ng-device-detector", function () {
             "windows", "windows-10", "ms-edge", "12.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Safari/537.36 Edge/12.0",
             "windows-phone", "windows-phone-10", "ms-edge", "12.0", "windows-phone", true, false, false);
+
+// Issue 29
+        describeUserAgent("Mozilla/5.0 (X11; CrOS x86_64 4731.85.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
+            "chrome-os", "unknown", "chrome", "31.0.1650.63", "chrome-book", true, true, false);
     });
 });

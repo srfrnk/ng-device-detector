@@ -14,12 +14,13 @@
         })
         .constant("DEVICES", {
             ANDROID: "android",
-            IPAD: "ipad",
+            I_PAD: "ipad",
             IPHONE: "iphone",
-            IPOD: "ipod",
+            I_POD: "ipod",
             BLACKBERRY: "blackberry",
-            FIREFOXOS: "firefoxos",
-            WINDOWSPHONE: "windows-phone",
+            FIREFOX_OS: "firefox-os",
+            CHROME_BOOK: "chrome-book",
+            WINDOWS_PHONE: "windows-phone",
             PS4: "ps4",
             VITA: "vita",
             UNKNOWN: "unknown"
@@ -31,8 +32,9 @@
             ANDROID: "android",
             LINUX: "linux",
             UNIX: "unix",
-            FIREFOXOS: "firefoxos",
-            WINDOWSPHONE: "windows-phone",
+            FIREFOX_OS: "firefox-os",
+            CHROME_OS: "chrome-os",
+            WINDOWS_PHONE: "windows-phone",
             PS4: "ps4",
             VITA: "vita",
             UNKNOWN: "unknown"
@@ -69,7 +71,7 @@
                 };
 
                 this.isIOS = function () {
-                    return (deviceInfo.os === OS.IOS || deviceInfo.device === DEVICES.IPOD || deviceInfo.device === DEVICES.IPHONE);
+                    return (deviceInfo.os === OS.IOS || deviceInfo.device === DEVICES.I_POD || deviceInfo.device === DEVICES.IPHONE);
                 };
             }
         ])
@@ -83,8 +85,9 @@
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     LINUX: /\bLinux\b/,
                     UNIX: /\bUNIX\b/,
-                    FIREFOXOS: {and: [/\bFirefox\b/, /Mobile\b/]},
-                    WINDOWSPHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
+                    FIREFOX_OS: {and: [/\bFirefox\b/, /Mobile\b/]},
+                    CHROME_OS: /\bCrOS\b/,
+                    WINDOWS_PHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
@@ -102,12 +105,13 @@
 
                 var DEVICES_RE = {
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
-                    IPAD: /\biPad\b/,
+                    I_PAD: /\biPad\b/,
                     IPHONE: /\biPhone\b/,
-                    IPOD: /\biPod\b/,
+                    I_POD: /\biPod\b/,
                     BLACKBERRY: /\bblackberry\b/,
-                    FIREFOXOS: {and: [/\bFirefox\b/, /\bMobile\b/]},
-                    WINDOWSPHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
+                    FIREFOX_OS: {and: [/\bFirefox\b/, /\bMobile\b/]},
+                    CHROME_BOOK: /\bCrOS\b/,
+                    WINDOWS_PHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
@@ -183,8 +187,9 @@
                     OS.ANDROID,
                     OS.LINUX,
                     OS.UNIX,
-                    OS.FIREFOXOS,
-                    OS.WINDOWSPHONE,
+                    OS.FIREFOX_OS,
+                    OS.CHROME_OS,
+                    OS.WINDOWS_PHONE,
                     OS.PS4,
                     OS.VITA
                 ].reduce(function (previousValue, currentValue) {
@@ -206,12 +211,13 @@
 
                 deviceInfo.device = [
                     DEVICES.ANDROID,
-                    DEVICES.IPAD,
+                    DEVICES.I_PAD,
                     DEVICES.IPHONE,
-                    DEVICES.IPOD,
+                    DEVICES.I_POD,
                     DEVICES.BLACKBERRY,
-                    DEVICES.FIREFOXOS,
-                    DEVICES.WINDOWSPHONE,
+                    DEVICES.FIREFOX_OS,
+                    DEVICES.CHROME_BOOK,
+                    DEVICES.WINDOWS_PHONE,
                     DEVICES.PS4,
                     DEVICES.VITA
                 ].reduce(function (previousValue, currentValue) {
@@ -251,12 +257,13 @@
                 deviceInfo.isMobile = function () {
                     return [
                         DEVICES.ANDROID,
-                        DEVICES.IPAD,
+                        DEVICES.I_PAD,
                         DEVICES.IPHONE,
-                        DEVICES.IPOD,
+                        DEVICES.I_POD,
                         DEVICES.BLACKBERRY,
-                        DEVICES.FIREFOXOS,
-                        DEVICES.WINDOWSPHONE,
+                        DEVICES.FIREFOX_OS,
+                        DEVICES.CHROME_BOOK,
+                        DEVICES.WINDOWS_PHONE,
                         DEVICES.VITA
                     ].some(function (item) {
                             return deviceInfo.device == item;
@@ -265,8 +272,9 @@
 
                 deviceInfo.isTablet = function () {
                     return [
-                        DEVICES.IPAD,
-                        DEVICES.FIREFOXOS
+                        DEVICES.I_PAD,
+                        DEVICES.FIREFOX_OS,
+                        DEVICES.CHROME_BOOK
                     ].some(function (item) {
                             return deviceInfo.device == item;
                         });
