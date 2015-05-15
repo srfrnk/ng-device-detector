@@ -32,7 +32,7 @@ gulp.task('watch', [], function () {
 
 gulp.task('version', ["minify"], function () {
     gulp.src(['./package.json', './bower.json'])
-        .pipe(bump({type: patch}))
+        .pipe(bump())
         .pipe(gulp.dest('./'))
         .pipe(git.commit('bumps package version'))
         .pipe(filter('package.json'))
