@@ -103,4 +103,30 @@ describe("detectUtils", function () {
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
             "windows", "chrome", "unknown");
     });
+
+    describe("with windows phone user-agent", function () {
+        function describeUserAgent(userAgent, os, browser, device) {
+            describe(userAgent, function () {
+                beforeEach(function () {
+                    loadDetector(userAgent);
+                });
+
+                it("should return false for iOS", function () {
+                    expect(util.isIOS()).toBeFalsy();
+                });
+
+                it("should return true for isMobile ", function () {
+                    expect(util.isMobile()).toBeTruthy();
+                });
+
+                it("should return false for isAndroid ", function () {
+                    expect(util.isAndroid()).toBeFalsy();
+                });
+            });
+        }
+
+        // Windows phone
+        describeUserAgent("Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 930) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537",
+            "windows-phone", "ie", "windows-phone");
+    });
 });
