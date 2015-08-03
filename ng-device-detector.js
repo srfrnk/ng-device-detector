@@ -80,8 +80,8 @@
 
                 var OS_RE = {
                     WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
-                    MAC: /\bMac OS\b/,
-                    IOS: {or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]},
+                    MAC: {and:[/\bMac OS\b/,{not:/Windows Phone/}]},
+                    IOS: {and: [{or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]}, {not: /Windows Phone/}]},
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     LINUX: /\bLinux\b/,
                     UNIX: /\bUNIX\b/,
@@ -95,7 +95,7 @@
                 var BROWSERS_RE = {
                     CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
                     FIREFOX: /\bFirefox\b/,
-                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
+                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/,/Windows Phone/]}}]},
                     OPERA: {or:[/Opera\b/,/\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
                     MS_EDGE: {or: [/\bEdge\b/]},
@@ -106,7 +106,7 @@
                 var DEVICES_RE = {
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     I_PAD: /\biPad\b/,
-                    IPHONE: /\biPhone\b/,
+                    IPHONE: {and: [/\biPhone\b/, {not:/Windows Phone/}]},
                     I_POD: /\biPod\b/,
                     BLACKBERRY: /\bblackberry\b/,
                     FIREFOX_OS: {and: [/\bFirefox\b/, /\bMobile\b/]},
