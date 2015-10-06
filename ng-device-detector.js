@@ -265,7 +265,6 @@
                         DEVICES.I_POD,
                         DEVICES.BLACKBERRY,
                         DEVICES.FIREFOX_OS,
-                        DEVICES.CHROME_BOOK,
                         DEVICES.WINDOWS_PHONE,
                         DEVICES.VITA
                     ].some(function (item) {
@@ -276,8 +275,7 @@
                 deviceInfo.isTablet = function () {
                     return [
                         DEVICES.I_PAD,
-                        DEVICES.FIREFOX_OS,
-                        DEVICES.CHROME_BOOK
+                        DEVICES.FIREFOX_OS
                     ].some(function (item) {
                             return deviceInfo.device == item;
                         });
@@ -286,6 +284,7 @@
                 deviceInfo.isDesktop = function () {
                     return [
                         DEVICES.PS4,
+                        DEVICES.CHROME_BOOK,
                         DEVICES.UNKNOWN
                     ].some(function (item) {
                             return deviceInfo.device == item;
