@@ -23,7 +23,7 @@
     "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "description": "Uses user-agent to set css classes or directly usable via JS.",
-  "main": "ng-device-detector.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/srfrnk/ng-device-detector.git"
