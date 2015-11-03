@@ -1,3 +1,3 @@
 require('re-tree');
-require('ng-device-detector');
+require('./ng-device-detector');
 module.exports = 'ng.deviceDetector';
