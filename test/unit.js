@@ -202,10 +202,9 @@ describe("ng-device-detector", function () {
 // Issue 32
         describeUserAgent("Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 930) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537",
             "windows-phone", "windows-phone-8-1", "ie", "11.0", "windows-phone", true, false, false);
-    });
 
-    // Issue 42
-    describeUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/47.0.2526.107 Mobile/13C75 Safari/601.1.46",
-        "ios", "unknown", "chrome", "47.0.2526.107", "iphone", true, false, false);
-});
+// Issue 42
+        describeUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/47.0.2526.107 Mobile/13C75 Safari/601.1.46",
+            "ios", "unknown", "chrome", "47.0.2526.107", "iphone", true, false, false);
+    });
 });
