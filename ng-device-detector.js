@@ -136,7 +136,7 @@
                 };
 
                 var BROWSER_VERSIONS_RE_MAP = {
-                    CHROME:/\bChrome\/([\d\.]+)\b/,
+                    CHROME:[/\bChrome\/([\d\.]+)\b/,/\bCriOS\/([\d\.]+)\b/],
                     FIREFOX:/\bFirefox\/([\d\.]+)\b/,
                     SAFARI:/\bVersion\/([\d\.]+)\b/,
                     OPERA:[/\bVersion\/([\d\.]+)\b/,/\bOPR\/([\d\.]+)\b/],

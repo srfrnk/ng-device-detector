@@ -104,7 +104,7 @@ describe("ng-device-detector", function () {
 
 // Issue #10
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/38.0.2125.59 Mobile/12A405 Safari/600.1.4 (000767)",
-            "ios", "unknown", "chrome", "0", "ipad", true, true, false);
+            "ios", "unknown", "chrome", "38.0.2125.59", "ipad", true, true, false);
 
 // Issue #14
         describeUserAgent("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)",
@@ -198,5 +198,9 @@ describe("ng-device-detector", function () {
 // Issue 29
         describeUserAgent("Mozilla/5.0 (X11; CrOS x86_64 4731.85.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
             "chrome-os", "unknown", "chrome", "31.0.1650.63", "chrome-book", true, true, false);
+
+// Issue 42
+        describeUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/47.0.2526.107 Mobile/13C75 Safari/601.1.46",
+            "ios", "unknown", "chrome", "47.0.2526.107", "iphone", true, false, false);
     });
 });
