@@ -54,6 +54,7 @@
             WINDOWS_8: "windows-8",
             WINDOWS_10: "windows-10",
             WINDOWS_PHONE_7_5: "windows-phone-7-5",
+            WINDOWS_PHONE_8_1: "windows-phone-8-1",
             WINDOWS_PHONE_10: "windows-phone-10",
             WINDOWS_NT_4_0: "windows-nt-4-0",
             UNKNOWN: "unknown"
@@ -80,8 +81,8 @@
 
                 var OS_RE = {
                     WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
-                    MAC: /\bMac OS\b/,
-                    IOS: {or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]},
+                    MAC: {and:[/\bMac OS\b/,{not:/Windows Phone/}]},
+                    IOS: {and: [{or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]}, {not: /Windows Phone/}]},
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     LINUX: /\bLinux\b/,
                     UNIX: /\bUNIX\b/,
@@ -95,7 +96,7 @@
                 var BROWSERS_RE = {
                     CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
                     FIREFOX: /\bFirefox\b/,
-                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
+                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/,/Windows Phone/]}}]},
                     OPERA: {or:[/Opera\b/,/\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
                     MS_EDGE: {or: [/\bEdge\b/]},
@@ -106,7 +107,7 @@
                 var DEVICES_RE = {
                     ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
                     I_PAD: /\biPad\b/,
-                    IPHONE: /\biPhone\b/,
+                    IPHONE: {and: [/\biPhone\b/, {not:/Windows Phone/}]},
                     I_POD: /\biPod\b/,
                     BLACKBERRY: /\bblackberry\b/,
                     FIREFOX_OS: {and: [/\bFirefox\b/, /\bMobile\b/]},
@@ -131,6 +132,7 @@
                     WINDOWS_8: /(Windows 8|Windows NT 6.2)/,
                     WINDOWS_10: /(Windows NT 10.0)/,
                     WINDOWS_PHONE_7_5: /(Windows Phone OS 7.5)/,
+                    WINDOWS_PHONE_8_1: /(Windows Phone 8.1)/,
                     WINDOWS_PHONE_10: /(Windows Phone 10)/,
                     WINDOWS_NT_4_0: {and:[/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/,{not:/Windows NT 10.0/}]}
                 };
@@ -239,6 +241,7 @@
                     OS_VERSIONS.WINDOWS_8,
                     OS_VERSIONS.WINDOWS_10,
                     OS_VERSIONS.WINDOWS_PHONE_7_5,
+                    OS_VERSIONS.WINDOWS_PHONE_8_1,
                     OS_VERSIONS.WINDOWS_PHONE_10,
                     OS_VERSIONS.WINDOWS_NT_4_0
                 ].reduce(function (previousValue, currentValue) {
@@ -262,7 +265,6 @@
                         DEVICES.I_POD,
                         DEVICES.BLACKBERRY,
                         DEVICES.FIREFOX_OS,
-                        DEVICES.CHROME_BOOK,
                         DEVICES.WINDOWS_PHONE,
                         DEVICES.VITA
                     ].some(function (item) {
@@ -273,8 +275,7 @@
                 deviceInfo.isTablet = function () {
                     return [
                         DEVICES.I_PAD,
-                        DEVICES.FIREFOX_OS,
-                        DEVICES.CHROME_BOOK
+                        DEVICES.FIREFOX_OS
                     ].some(function (item) {
                             return deviceInfo.device == item;
                         });
@@ -283,6 +284,7 @@
                 deviceInfo.isDesktop = function () {
                     return [
                         DEVICES.PS4,
+                        DEVICES.CHROME_BOOK,
                         DEVICES.UNKNOWN
                     ].some(function (item) {
                             return deviceInfo.device == item;
