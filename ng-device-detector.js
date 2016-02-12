@@ -8,8 +8,7 @@
             OPERA: "opera",
             IE: "ie",
             MS_EDGE: "ms-edge",
-            PS4: "ps4",
-            VITA: "vita",
+            FB_MESSANGER: "fb-messanger",
             UNKNOWN: "unknown"
         })
         .constant("DEVICES", {
@@ -23,6 +22,9 @@
             WINDOWS_PHONE: "windows-phone",
             PS4: "ps4",
             VITA: "vita",
+            CHROMECAST: "chromecast",
+            APPLE_TV:"apple-tv",
+            GOOGLE_TV:"google-tv",
             UNKNOWN: "unknown"
         })
         .constant("OS", {
@@ -35,8 +37,6 @@
             FIREFOX_OS: "firefox-os",
             CHROME_OS: "chrome-os",
             WINDOWS_PHONE: "windows-phone",
-            PS4: "ps4",
-            VITA: "vita",
             UNKNOWN: "unknown"
         })
         .constant("OS_VERSIONS", {
@@ -76,44 +76,124 @@
                 };
             }
         ])
-        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS", "OS_VERSIONS","reTree",
-            function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS,reTree) {
+        .factory("deviceDetector", ["$window", "DEVICES", "BROWSERS", "OS", "OS_VERSIONS", "reTree",
+            function ($window, DEVICES, BROWSERS, OS, OS_VERSIONS, reTree) {
+                /* ES5 polyfills Start*/
+
+                // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+                if (!Object.keys) {
+                    Object.keys = (function () {
+                        'use strict';
+                        var hasOwnProperty = Object.prototype.hasOwnProperty,
+                            hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+                            dontEnums = [
+                                'toString',
+                                'toLocaleString',
+                                'valueOf',
+                                'hasOwnProperty',
+                                'isPrototypeOf',
+                                'propertyIsEnumerable',
+                                'constructor'
+                            ],
+                            dontEnumsLength = dontEnums.length;
+
+                        return function (obj) {
+                            if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+                                throw new TypeError('Object.keys called on non-object');
+                            }
+
+                            var result = [], prop, i;
+
+                            for (prop in obj) {
+                                if (hasOwnProperty.call(obj, prop)) {
+                                    result.push(prop);
+                                }
+                            }
+
+                            if (hasDontEnumBug) {
+                                for (i = 0; i < dontEnumsLength; i++) {
+                                    if (hasOwnProperty.call(obj, dontEnums[i])) {
+                                        result.push(dontEnums[i]);
+                                    }
+                                }
+                            }
+                            return result;
+                        };
+                    }());
+                }
+
+                // Production steps of ECMA-262, Edition 5, 15.4.4.21
+                // Reference: http://es5.github.io/#x15.4.4.21
+                if (!Array.prototype.reduce) {
+                    Array.prototype.reduce = function (callback /*, initialValue*/) {
+                        'use strict';
+                        if (this == null) {
+                            throw new TypeError('Array.prototype.reduce called on null or undefined');
+                        }
+                        if (typeof callback !== 'function') {
+                            throw new TypeError(callback + ' is not a function');
+                        }
+                        var t = Object(this), len = t.length >>> 0, k = 0, value;
+                        if (arguments.length == 2) {
+                            value = arguments[1];
+                        } else {
+                            while (k < len && !(k in t)) {
+                                k++;
+                            }
+                            if (k >= len) {
+                                throw new TypeError('Reduce of empty array with no initial value');
+                            }
+                            value = t[k++];
+                        }
+                        for (; k < len; k++) {
+                            if (k in t) {
+                                value = callback(value, t[k], k, t);
+                            }
+                        }
+                        return value;
+                    };
+                }
+                /* ES5 polyfills End*/
 
                 var OS_RE = {
                     WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
-                    MAC: {and:[/\bMac OS\b/,{not:/Windows Phone/}]},
+                    MAC: {and: [/\bMac OS\b/, {not: /Windows Phone/}]},
                     IOS: {and: [{or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]}, {not: /Windows Phone/}]},
-                    ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
+                    ANDROID: {and: [/\bAndroid\b/, {not: /Windows Phone/}]},
                     LINUX: /\bLinux\b/,
                     UNIX: /\bUNIX\b/,
                     FIREFOX_OS: {and: [/\bFirefox\b/, /Mobile\b/]},
                     CHROME_OS: /\bCrOS\b/,
-                    WINDOWS_PHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
+                    WINDOWS_PHONE: {or: [/\bIEMobile\b/, /\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
                 var BROWSERS_RE = {
-                    CHROME: {and:[{or: [/\bChrome\b/, /\bCriOS\b/]},{not:{or:[/\bOPR\b/,/\bEdge\b/]}}]},
+                    CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/]}}]},
                     FIREFOX: /\bFirefox\b/,
-                    SAFARI: {and:[/^((?!CriOS).)*\Safari\b.*$/,{not:{or:[/\bOPR\b/,/\bEdge\b/,/Windows Phone/]}}]},
-                    OPERA: {or:[/Opera\b/,/\bOPR\b/]},
-                    IE: {or: [/\bMSIE\b/, /\bTrident\b/]},
+                    SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/]}}]},
+                    OPERA: {or: [/Opera\b/, /\bOPR\b/]},
+                    IE: {or: [/\bMSIE\b/, /\bTrident\b/,/^Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)$/]},
                     MS_EDGE: {or: [/\bEdge\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
-                    VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
+                    VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/,
+                    FB_MESSANGER: /\bFBAN\/MessengerForiOS\b/
                 };
 
                 var DEVICES_RE = {
-                    ANDROID: {and:[/\bAndroid\b/,{not:/Windows Phone/}]},
+                    ANDROID: {and: [/\bAndroid\b/, {not: /Windows Phone/}]},
                     I_PAD: /\biPad\b/,
-                    IPHONE: {and: [/\biPhone\b/, {not:/Windows Phone/}]},
+                    IPHONE: {and: [/\biPhone\b/, {not: /Windows Phone/}]},
                     I_POD: /\biPod\b/,
                     BLACKBERRY: /\bblackberry\b/,
                     FIREFOX_OS: {and: [/\bFirefox\b/, /\bMobile\b/]},
                     CHROME_BOOK: /\bCrOS\b/,
-                    WINDOWS_PHONE: {or:[/\bIEMobile\b/,/\bWindows Phone\b/]},
+                    WINDOWS_PHONE: {or: [/\bIEMobile\b/, /\bWindows Phone\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
+                    CHROMECAST: /\bCrKey\b/,
+                    APPLE_TV:/^iTunes-AppleTV\/4.1$/,
+                    GOOGLE_TV:/\bGoogleTV\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/
                 };
 
@@ -134,22 +214,22 @@
                     WINDOWS_PHONE_7_5: /(Windows Phone OS 7.5)/,
                     WINDOWS_PHONE_8_1: /(Windows Phone 8.1)/,
                     WINDOWS_PHONE_10: /(Windows Phone 10)/,
-                    WINDOWS_NT_4_0: {and:[/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/,{not:/Windows NT 10.0/}]}
+                    WINDOWS_NT_4_0: {and: [/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/, {not: /Windows NT 10.0/}]}
                 };
 
                 var BROWSER_VERSIONS_RE_MAP = {
-                    CHROME:[/\bChrome\/([\d\.]+)\b/,/\bCriOS\/([\d\.]+)\b/],
-                    FIREFOX:/\bFirefox\/([\d\.]+)\b/,
-                    SAFARI:/\bVersion\/([\d\.]+)\b/,
-                    OPERA:[/\bVersion\/([\d\.]+)\b/,/\bOPR\/([\d\.]+)\b/],
-                    IE:[/\bMSIE ([\d\.]+\w?)\b/,/\brv:([\d\.]+\w?)\b/],
-                    MS_EDGE:/\bEdge\/([\d\.]+)\b/
+                    CHROME: [/\bChrome\/([\d\.]+)\b/, /\bCriOS\/([\d\.]+)\b/],
+                    FIREFOX: /\bFirefox\/([\d\.]+)\b/,
+                    SAFARI: /\bVersion\/([\d\.]+)\b/,
+                    OPERA: [/\bVersion\/([\d\.]+)\b/, /\bOPR\/([\d\.]+)\b/],
+                    IE: [/\bMSIE ([\d\.]+\w?)\b/, /\brv:([\d\.]+\w?)\b/],
+                    MS_EDGE: /\bEdge\/([\d\.]+)\b/
                 };
 
                 var BROWSER_VERSIONS_RE = Object.keys(BROWSER_VERSIONS_RE_MAP).reduce(function (obj, key) {
-                    obj[BROWSERS[key]]=BROWSER_VERSIONS_RE_MAP[key];
+                    obj[BROWSERS[key]] = BROWSER_VERSIONS_RE_MAP[key];
                     return obj;
-                },{});
+                }, {});
 
                 var ua = $window.navigator.userAgent;
 
@@ -191,12 +271,10 @@
                     OS.UNIX,
                     OS.FIREFOX_OS,
                     OS.CHROME_OS,
-                    OS.WINDOWS_PHONE,
-                    OS.PS4,
-                    OS.VITA
+                    OS.WINDOWS_PHONE
                 ].reduce(function (previousValue, currentValue) {
-                        return (previousValue === OS.UNKNOWN && deviceInfo.raw.os[currentValue]) ? currentValue : previousValue;
-                    }, OS.UNKNOWN);
+                    return (previousValue === OS.UNKNOWN && deviceInfo.raw.os[currentValue]) ? currentValue : previousValue;
+                }, OS.UNKNOWN);
 
                 deviceInfo.browser = [
                     BROWSERS.CHROME,
@@ -205,11 +283,10 @@
                     BROWSERS.OPERA,
                     BROWSERS.IE,
                     BROWSERS.MS_EDGE,
-                    BROWSERS.PS4,
-                    BROWSERS.VITA
+                    BROWSERS.FB_MESSANGER
                 ].reduce(function (previousValue, currentValue) {
-                        return (previousValue === BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue]) ? currentValue : previousValue;
-                    }, BROWSERS.UNKNOWN);
+                    return (previousValue === BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue]) ? currentValue : previousValue;
+                }, BROWSERS.UNKNOWN);
 
                 deviceInfo.device = [
                     DEVICES.ANDROID,
@@ -221,10 +298,13 @@
                     DEVICES.CHROME_BOOK,
                     DEVICES.WINDOWS_PHONE,
                     DEVICES.PS4,
+                    DEVICES.CHROMECAST,
+                    DEVICES.APPLE_TV,
+                    DEVICES.GOOGLE_TV,
                     DEVICES.VITA
                 ].reduce(function (previousValue, currentValue) {
-                        return (previousValue === DEVICES.UNKNOWN && deviceInfo.raw.device[currentValue]) ? currentValue : previousValue;
-                    }, DEVICES.UNKNOWN);
+                    return (previousValue === DEVICES.UNKNOWN && deviceInfo.raw.device[currentValue]) ? currentValue : previousValue;
+                }, DEVICES.UNKNOWN);
 
                 deviceInfo.os_version = [
                     OS_VERSIONS.WINDOWS_3_11,
@@ -245,13 +325,13 @@
                     OS_VERSIONS.WINDOWS_PHONE_10,
                     OS_VERSIONS.WINDOWS_NT_4_0
                 ].reduce(function (previousValue, currentValue) {
-                        return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
-                    }, OS_VERSIONS.UNKNOWN);
+                    return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
+                }, OS_VERSIONS.UNKNOWN);
 
                 deviceInfo.browser_version = "0";
                 if (deviceInfo.browser !== BROWSERS.UNKNOWN) {
                     var re = BROWSER_VERSIONS_RE[deviceInfo.browser];
-                    var res = reTree.exec(ua,re);
+                    var res = reTree.exec(ua, re);
                     if (!!res) {
                         deviceInfo.browser_version = res[1];
                     }
@@ -268,8 +348,8 @@
                         DEVICES.WINDOWS_PHONE,
                         DEVICES.VITA
                     ].some(function (item) {
-                            return deviceInfo.device == item;
-                        });
+                        return deviceInfo.device == item;
+                    });
                 };
 
                 deviceInfo.isTablet = function () {
@@ -277,8 +357,8 @@
                         DEVICES.I_PAD,
                         DEVICES.FIREFOX_OS
                     ].some(function (item) {
-                            return deviceInfo.device == item;
-                        });
+                        return deviceInfo.device == item;
+                    });
                 };
 
                 deviceInfo.isDesktop = function () {
@@ -287,8 +367,8 @@
                         DEVICES.CHROME_BOOK,
                         DEVICES.UNKNOWN
                     ].some(function (item) {
-                            return deviceInfo.device == item;
-                        });
+                        return deviceInfo.device == item;
+                    });
                 };
 
                 return deviceInfo;

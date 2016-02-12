@@ -112,9 +112,9 @@ describe("ng-device-detector", function () {
 
 // Issue #15
         describeUserAgent("Mozilla/5.0 (PlayStation 4 1.52) AppleWebKit/536.26 (KHTML, like Gecko)",
-            "ps4", "unknown", "ps4", "0", "ps4", false, false, true);
+            "unknown", "unknown", "unknown", "0", "ps4", false, false, true);
         describeUserAgent("Mozilla/5.0 (Playstation Vita 1.61) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
-            "vita", "unknown", "vita", "0", "vita", true, false, false);
+            "unknown", "unknown", "unknown", "0", "vita", true, false, false);
 
 // Issue #18
         describeUserAgent("Mozilla/5.0 (Win16; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
@@ -206,5 +206,37 @@ describe("ng-device-detector", function () {
 // Issue 42
         describeUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/47.0.2526.107 Mobile/13C75 Safari/601.1.46",
             "ios", "unknown", "chrome", "47.0.2526.107", "iphone", true, false, false);
+
+// Issue 43
+        describe("ES5 support", function () {
+            beforeEach(function () {
+                Object.keys = undefined;
+                Array.prototype.reduce = undefined;
+            });
+
+            it("should load", function () {
+                loadDetector("");
+                expect(deviceDetector).not.toBeNull();
+            });
+        });
+
+// Issue 39
+        describeUserAgent("Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13B143 [FBAN/MessengerForiOS;FBAV/48.0.0.20.47;FBBV/17291106;FBDV/iPad2,5;FBMD/iPad;FBSN/iPhone OS;FBSV/9.1;FBSS/1; FBCR/;FBID/tablet;FBLC/cs_CZ;FBOP/1]",
+            "ios", "unknown", "fb-messanger", "0", "ipad", true, true, false);
+
+// Issue 40
+        describeUserAgent("Mozilla/5.0 (CrKey armv7l 1.4.15250) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.0 Safari/537.36",
+            "unknown", "unknown", "chrome", "31.0.1650.0", "chromecast", false, false, false);
+        describeUserAgent("iTunes-AppleTV/4.1",
+            "unknown", "unknown", "unknown", "0", "apple-tv", false, false, false);
+        describeUserAgent("Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.127 Large Screen Safari/533.4 GoogleTV/ 162671",
+            "linux", "unknown", "chrome", "5.0.375.127", "google-tv", false, false, false);
+
+// Issue 44
+        describeUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "windows", "windows-10", "ie", "0", "unknown", false, false, true);
+
+
+
     });
 });
