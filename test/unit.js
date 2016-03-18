@@ -236,6 +236,10 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
             "windows", "windows-10", "ie", "0", "unknown", false, false, true);
 
+// Issue 45
+        describeUserAgent("Mozilla/5.0 (iPad; CPU OS 9_2_1 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/49.0.2623.73 Mobile/13D15 Safari/601.1.46",
+            "ios", "unknown", "chrome", "49.0.2623.73", "ipad", true, true, false);
+
 
 
     });
