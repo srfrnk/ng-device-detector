@@ -57,6 +57,21 @@
             WINDOWS_PHONE_8_1: "windows-phone-8-1",
             WINDOWS_PHONE_10: "windows-phone-10",
             WINDOWS_NT_4_0: "windows-nt-4-0",
+            MACOSX_15: "mac-os-x-15",
+            MACOSX_14: "mac-os-x-14",
+            MACOSX_13: "mac-os-x-13",
+            MACOSX_12: "mac-os-x-12",
+            MACOSX_11: "mac-os-x-11",
+            MACOSX_10: "mac-os-x-10",
+            MACOSX_9: "mac-os-x-9",
+            MACOSX_8: "mac-os-x-8",
+            MACOSX_7: "mac-os-x-7",
+            MACOSX_6: "mac-os-x-6",
+            MACOSX_5: "mac-os-x-5",
+            MACOSX_4: "mac-os-x-4",
+            MACOSX_3: "mac-os-x-3",
+            MACOSX_2: "mac-os-x-2",
+            MACOSX: "mac-os-x",
             UNKNOWN: "unknown"
         })
         .service("detectUtils", ["deviceDetector", "DEVICES", "BROWSERS", "OS",
@@ -214,7 +229,21 @@
                     WINDOWS_PHONE_7_5: /(Windows Phone OS 7.5)/,
                     WINDOWS_PHONE_8_1: /(Windows Phone 8.1)/,
                     WINDOWS_PHONE_10: /(Windows Phone 10)/,
-                    WINDOWS_NT_4_0: {and: [/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/, {not: /Windows NT 10.0/}]}
+                    WINDOWS_NT_4_0: {and: [/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/, {not: /Windows NT 10.0/}]},
+                    MACOSX: /(MAC OS X\s*[^ 0-9])/,
+                    MACOSX_3: /(Darwin 10.3|Mac OS X 10.3)/,
+                    MACOSX_4: /(Darwin 10.4|Mac OS X 10.4)/,
+                    MACOSX_5: /(Mac OS X 10.5)/,
+                    MACOSX_6: /(Mac OS X 10.6)/,
+                    MACOSX_7: /(Mac OS X 10.7)/,
+                    MACOSX_8: /(Mac OS X 10.8)/,
+                    MACOSX_9: /(Mac OS X 10.9)/,
+                    MACOSX_10: /(Mac OS X 10.10)/,
+                    MACOSX_11: /(Mac OS X 10.11)/,
+                    MACOSX_12: /(Mac OS X 10.12)/,
+                    MACOSX_13: /(Mac OS X 10.13)/,
+                    MACOSX_14: /(Mac OS X 10.14)/,
+                    MACOSX_15: /(Mac OS X 10.15)/
                 };
 
                 var BROWSER_VERSIONS_RE_MAP = {
@@ -323,7 +352,21 @@
                     OS_VERSIONS.WINDOWS_PHONE_7_5,
                     OS_VERSIONS.WINDOWS_PHONE_8_1,
                     OS_VERSIONS.WINDOWS_PHONE_10,
-                    OS_VERSIONS.WINDOWS_NT_4_0
+                    OS_VERSIONS.WINDOWS_NT_4_0,
+                    OS_VERSIONS.MACOSX,
+                    OS_VERSIONS.MACOSX_3,
+                    OS_VERSIONS.MACOSX_4,
+                    OS_VERSIONS.MACOSX_5,
+                    OS_VERSIONS.MACOSX_6,
+                    OS_VERSIONS.MACOSX_7,
+                    OS_VERSIONS.MACOSX_8,
+                    OS_VERSIONS.MACOSX_9,
+                    OS_VERSIONS.MACOSX_10,
+                    OS_VERSIONS.MACOSX_11,
+                    OS_VERSIONS.MACOSX_12,
+                    OS_VERSIONS.MACOSX_13,
+                    OS_VERSIONS.MACOSX_14,
+                    OS_VERSIONS.MACOSX_15
                 ].reduce(function (previousValue, currentValue) {
                     return (previousValue === OS_VERSIONS.UNKNOWN && deviceInfo.raw.os_version[currentValue]) ? currentValue : previousValue;
                 }, OS_VERSIONS.UNKNOWN);
