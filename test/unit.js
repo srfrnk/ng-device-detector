@@ -82,7 +82,7 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
             "windows", "windows-8-1", "chrome", "37.0.2049.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
-            "mac", "unknown", "chrome", "32.0.1664.3", "mac-os-x-9", false, false, true);
+            "mac", "mac-os-x-9", "chrome", "32.0.1664.3", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21",
             "linux", "unknown", "chrome", "19.0.1042.0", "unknown", false, false, true);
 
@@ -90,7 +90,7 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
             "windows", "windows-xp", "firefox", "31.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:25.0) Gecko/20100101 Firefox/25.0",
-            "mac", "unknown", "firefox", "25.0", "mac-os-x-6", false, false, true);
+            "mac", "mac-os-x-6", "firefox", "25.0", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0",
             "linux", "unknown", "firefox", "24.0", "unknown", false, false, true);
 
@@ -98,7 +98,7 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25",
             "ios", "unknown", "safari", "6.0", "ipad", true, true, false);
         describeUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
-            "mac", "unknown", "safari", "5.1.7", "mac-os-x-6", false, false, true);
+            "mac", "mac-os-x-6", "safari", "5.1.7", "unknown", false, false, true);
         describeUserAgent("Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+",
             "linux", "unknown", "safari", "5.0", "unknown", false, false, true);
 
