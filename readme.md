@@ -7,7 +7,7 @@ Uses user-agent to set css classes or directly usable via JS.
 See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.io/ng-device-detector)
 
 ### Install
-* Run $ bower install ng-device-detector --save
+* Run $ `bower install ng-device-detector --save`
 * Add script load to HTML:`<script type="text/javascript" src=".../re-tree.js"></script>`
 * Add script load to HTML:`<script type="text/javascript" src=".../ng-device-detector.js"></script>`
 * Add module to your app dependencies: `...angular.module("...", [..."ng.deviceDetector"...])...`
