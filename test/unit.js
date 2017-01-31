@@ -240,6 +240,12 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 9_2_1 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/49.0.2623.73 Mobile/13D15 Safari/601.1.46",
             "ios", "unknown", "chrome", "49.0.2623.73", "ipad", true, true, false);
 
+// Issue 53
+        describeUserAgent("Mozilla/5.0 (iPad; CPU OS 10_2 like Mac OS X) AppleWebKit/602.3.12 (KHTML, like Gecko) FxiOS/6.0 Mobile/14C92 Safari/602.3.12",
+            "ios", "unknown", "firefox", "6.0", "ipad", true, true, false);
+        describeUserAgent("Mozilla/5.0 (iPad; CPU OS 10_2 like Mac OS X) AppleWebKit/602.3.12 (KHTML, like Gecko) Version/10.0 Mobile/14C92 Safari/602.1",
+            "ios", "unknown", "safari", "10.0", "ipad", true, true, false);
+
 
 
     });

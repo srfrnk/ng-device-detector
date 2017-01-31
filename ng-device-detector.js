@@ -186,7 +186,7 @@
 
                 var BROWSERS_RE = {
                     CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/]}}]},
-                    FIREFOX: /\bFirefox\b/,
+                    FIREFOX: {or:[/\bFirefox\b/,/\bFxiOS\b/]},
                     SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/]}}]},
                     OPERA: {or: [/Opera\b/, /\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/,/^Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)$/]},
@@ -248,7 +248,7 @@
 
                 var BROWSER_VERSIONS_RE_MAP = {
                     CHROME: [/\bChrome\/([\d\.]+)\b/, /\bCriOS\/([\d\.]+)\b/],
-                    FIREFOX: /\bFirefox\/([\d\.]+)\b/,
+                    FIREFOX: [/\bFirefox\/([\d\.]+)\b/,/\bFxiOS\/([\d\.]+)\b/],
                     SAFARI: /\bVersion\/([\d\.]+)\b/,
                     OPERA: [/\bVersion\/([\d\.]+)\b/, /\bOPR\/([\d\.]+)\b/],
                     IE: [/\bMSIE ([\d\.]+\w?)\b/, /\brv:([\d\.]+\w?)\b/],
