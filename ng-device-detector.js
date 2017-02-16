@@ -8,7 +8,7 @@
             OPERA: "opera",
             IE: "ie",
             MS_EDGE: "ms-edge",
-            FB_MESSANGER: "fb-messanger",
+            FB_MESSENGER: "fb-messenger",
             UNKNOWN: "unknown"
         })
         .constant("DEVICES", {
@@ -193,7 +193,7 @@
                     MS_EDGE: {or: [/\bEdge\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/,
-                    FB_MESSANGER: /\bFBAN\/MessengerForiOS\b/
+                    FB_MESSENGER: /\bFBAN\/MessengerForiOS\b/
                 };
 
                 var DEVICES_RE = {
@@ -312,7 +312,7 @@
                     BROWSERS.OPERA,
                     BROWSERS.IE,
                     BROWSERS.MS_EDGE,
-                    BROWSERS.FB_MESSANGER
+                    BROWSERS.FB_MESSENGER
                 ].reduce(function (previousValue, currentValue) {
                     return (previousValue === BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue]) ? currentValue : previousValue;
                 }, BROWSERS.UNKNOWN);
