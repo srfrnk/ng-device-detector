@@ -424,6 +424,9 @@
                     elm.addClass('os-' + deviceDetector.os);
                     elm.addClass('browser-' + deviceDetector.browser);
                     elm.addClass('device-' + deviceDetector.device);
+                    elm.toggleClass('is-mobile', deviceDetector.isMobile());
+                    elm.toggleClass('is-tablet', deviceDetector.isTablet());
+                    elm.toggleClass('is-desktop', deviceDetector.isDesktop());
                 }
             };
         }]);
