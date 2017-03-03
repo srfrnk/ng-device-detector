@@ -254,6 +254,7 @@
                     SAFARI: /\bVersion\/([\d\.]+)\b/,
                     OPERA: [/\bVersion\/([\d\.]+)\b/, /\bOPR\/([\d\.]+)\b/],
                     IE: [/\bMSIE ([\d\.]+\w?)\b/, /\brv:([\d\.]+\w?)\b/],
+                    CORDOVA: /\bCordova\/([\d\.]+)\b/,
                     MS_EDGE: /\bEdge\/([\d\.]+)\b/
                 };
 
