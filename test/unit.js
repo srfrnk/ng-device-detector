@@ -246,7 +246,10 @@ describe("ng-device-detector", function () {
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 10_2 like Mac OS X) AppleWebKit/602.3.12 (KHTML, like Gecko) Version/10.0 Mobile/14C92 Safari/602.1",
             "ios", "unknown", "safari", "10.0", "ipad", true, true, false);
 
-
-
+// Issue 59
+        describeUserAgent("Mozilla/5.0 (Linux; U; Android 4.0.4; es-ve; LT22i Build/ 6.1.1.B.1.54) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/ 534.30",
+            "android", "unknown", "safari", "4.0", "android", true, false, false);
+        describeUserAgent("Mozilla/5.0 (Linux; U; Android 4.0.4; es-ve; LT22i Build/ 6.1.1.B.1.54) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/ 534.30 Cordova/6.2.0",
+            "android", "unknown", "cordova", "6.2.0", "android", true, false, false);
     });
 });

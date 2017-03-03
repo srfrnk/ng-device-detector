@@ -9,6 +9,7 @@
             IE: "ie",
             MS_EDGE: "ms-edge",
             FB_MESSANGER: "fb-messanger",
+            CORDOVA: "cordova",
             UNKNOWN: "unknown"
         })
         .constant("DEVICES", {
@@ -187,12 +188,13 @@
                 var BROWSERS_RE = {
                     CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/]}}]},
                     FIREFOX: {or:[/\bFirefox\b/,/\bFxiOS\b/]},
-                    SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/]}}]},
+                    SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/,/\bCordova\b/]}}]},
                     OPERA: {or: [/Opera\b/, /\bOPR\b/]},
                     IE: {or: [/\bMSIE\b/, /\bTrident\b/,/^Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)$/]},
                     MS_EDGE: {or: [/\bEdge\b/]},
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/,
+                    CORDOVA: /\bCordova\b/,
                     FB_MESSANGER: /\bFBAN\/MessengerForiOS\b/
                 };
 
@@ -252,6 +254,7 @@
                     SAFARI: /\bVersion\/([\d\.]+)\b/,
                     OPERA: [/\bVersion\/([\d\.]+)\b/, /\bOPR\/([\d\.]+)\b/],
                     IE: [/\bMSIE ([\d\.]+\w?)\b/, /\brv:([\d\.]+\w?)\b/],
+                    CORDOVA: /\bCordova\/([\d\.]+)\b/,
                     MS_EDGE: /\bEdge\/([\d\.]+)\b/
                 };
 
@@ -312,6 +315,7 @@
                     BROWSERS.OPERA,
                     BROWSERS.IE,
                     BROWSERS.MS_EDGE,
+                    BROWSERS.CORDOVA,
                     BROWSERS.FB_MESSANGER
                 ].reduce(function (previousValue, currentValue) {
                     return (previousValue === BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue]) ? currentValue : previousValue;
