@@ -1,11 +1,11 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var karma = require('karma').server;
 var git = require('gulp-git');
 var bump = require('gulp-bump');
 var filter = require('gulp-filter');
 var tag_version = require('gulp-tag-version');
+var Server = require('karma').Server;
 
 gulp.task('default', ["test"]);
 
@@ -20,10 +20,10 @@ gulp.task('minify', function () {
  * Run test once and exit
  */
 gulp.task('test', function (done) {
-    karma.start({
+    new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
-    }, done);
+    }, done).start();
 });
 
 gulp.task('watch', [], function () {
