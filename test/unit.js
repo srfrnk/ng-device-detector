@@ -222,7 +222,7 @@ describe("ng-device-detector", function () {
 
 // Issue 39
         describeUserAgent("Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13B143 [FBAN/MessengerForiOS;FBAV/48.0.0.20.47;FBBV/17291106;FBDV/iPad2,5;FBMD/iPad;FBSN/iPhone OS;FBSV/9.1;FBSS/1; FBCR/;FBID/tablet;FBLC/cs_CZ;FBOP/1]",
-            "ios", "unknown", "fb-messanger", "0", "ipad", true, true, false);
+            "ios", "unknown", "fb-messenger", "0", "ipad", true, true, false);
 
 // Issue 40
         describeUserAgent("Mozilla/5.0 (CrKey armv7l 1.4.15250) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.0 Safari/537.36",

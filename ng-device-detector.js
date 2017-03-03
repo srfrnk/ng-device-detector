@@ -8,7 +8,7 @@
             OPERA: "opera",
             IE: "ie",
             MS_EDGE: "ms-edge",
-            FB_MESSANGER: "fb-messanger",
+            FB_MESSENGER: "fb-messenger",
             CORDOVA: "cordova",
             UNKNOWN: "unknown"
         })
@@ -195,7 +195,7 @@
                     PS4: /\bMozilla\/5.0 \(PlayStation 4\b/,
                     VITA: /\bMozilla\/5.0 \(Play(S|s)tation Vita\b/,
                     CORDOVA: /\bCordova\b/,
-                    FB_MESSANGER: /\bFBAN\/MessengerForiOS\b/
+                    FB_MESSENGER: /\bFBAN\/MessengerForiOS\b/
                 };
 
                 var DEVICES_RE = {
@@ -254,7 +254,6 @@
                     SAFARI: /\bVersion\/([\d\.]+)\b/,
                     OPERA: [/\bVersion\/([\d\.]+)\b/, /\bOPR\/([\d\.]+)\b/],
                     IE: [/\bMSIE ([\d\.]+\w?)\b/, /\brv:([\d\.]+\w?)\b/],
-                    CORDOVA: /\bCordova\/([\d\.]+)\b/,
                     MS_EDGE: /\bEdge\/([\d\.]+)\b/
                 };
 
@@ -316,7 +315,7 @@
                     BROWSERS.IE,
                     BROWSERS.MS_EDGE,
                     BROWSERS.CORDOVA,
-                    BROWSERS.FB_MESSANGER
+                    BROWSERS.FB_MESSENGER
                 ].reduce(function (previousValue, currentValue) {
                     return (previousValue === BROWSERS.UNKNOWN && deviceInfo.raw.browser[currentValue]) ? currentValue : previousValue;
                 }, BROWSERS.UNKNOWN);
@@ -428,9 +427,6 @@
                     elm.addClass('os-' + deviceDetector.os);
                     elm.addClass('browser-' + deviceDetector.browser);
                     elm.addClass('device-' + deviceDetector.device);
-                    elm.toggleClass('is-mobile', deviceDetector.isMobile());
-                    elm.toggleClass('is-tablet', deviceDetector.isTablet());
-                    elm.toggleClass('is-desktop', deviceDetector.isDesktop());
                 }
             };
         }]);
