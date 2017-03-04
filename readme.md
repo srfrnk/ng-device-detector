@@ -14,6 +14,22 @@ See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.i
 * To add classes - add directive like so- `<div ... device-detector ...>`
 * To use directly add `"deviceDetector"` service to your injectors...
 
+### Setup
+
+You can set custom detectors at the provider object.
+The 
+```javascript
+angular.module(..., ["ng.deviceDetector"])
+    .config(['deviceDetectorProvider', function(deviceDetectorProvider) {
+      deviceDetectorProvider.addCustom("Custom_UA_Entry",{and:["\\bCustom_UA_Entry\\b",{not:"\\bChrome\\b"}]});
+    }])
+    .controller(..., ["$scope", "deviceDetector", function($scope, deviceDetector) {
+      $scope.customUAEntry = deviceDetector.custom["Custom_UA_Entry"]; // true / false
+    }]);
+```
+
+Custom detectors will also be added as CSS classes with 'is-' prefix and encoded into css class name casing.
+
 ### deviceDetector service
 Holds the following properties:
 * raw : object : contains the raw values... for internal use mostly.
