@@ -257,6 +257,16 @@ describe("ng-device-detector", function () {
             "android", "unknown", "safari", "4.0", "android", true, false, false);
         describeUserAgent("Mozilla/5.0 (Linux; U; Android 4.0.4; es-ve; LT22i Build/ 6.1.1.B.1.54) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/ 534.30 Cordova/6.2.0",
             "android", "unknown", "cordova", "6.2.0", "android", true, false, false);
+
+        // Issue 61
+        describeUserAgent("Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19",
+            "android", "unknown", "chrome", "18.0.1025.133", "android", true, false, false);
+        describeUserAgent("Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19 Cordova/6.2.0",
+            "android", "unknown", "cordova", "6.2.0", "android", true, false, false);
+        describeUserAgent("Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+            "android", "unknown", "firefox", "41.0", "android", true, false, false);
+        describeUserAgent("Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0 Cordova/6.2.0",
+            "android", "unknown", "cordova", "6.2.0", "android", true, false, false);
     });
 
     describe("with custom detection", function () {

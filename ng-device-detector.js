@@ -190,8 +190,8 @@
                     };
 
                     var BROWSERS_RE = {
-                        CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/]}}]},
-                        FIREFOX: {or: [/\bFirefox\b/, /\bFxiOS\b/]},
+                        CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/, /\bCordova\b/]}}]},
+                        FIREFOX: {and: [{or: [/\bFirefox\b/, /\bFxiOS\b/]}, {not: /\bCordova\b/}]},
                         SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/, /\bCordova\b/]}}]},
                         OPERA: {or: [/Opera\b/, /\bOPR\b/]},
                         IE: {or: [/\bMSIE\b/, /\bTrident\b/, /^Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)$/]},
@@ -432,7 +432,7 @@
         )
         .directive('deviceDetector', ["deviceDetector", function (deviceDetector) {
             function customClassName(name) {
-                return 'is-'+name.toLowerCase().replace(/[^0-9a-z]+/g,'-');
+                return 'is-' + name.toLowerCase().replace(/[^0-9a-z]+/g, '-');
             }
 
             return {
