@@ -192,7 +192,7 @@
                     var BROWSERS_RE = {
                         CHROME: {and: [{or: [/\bChrome\b/, /\bCriOS\b/]}, {not: {or: [/\bOPR\b/, /\bEdge\b/, /\bCordova\b/]}}]},
                         FIREFOX: {and: [{or: [/\bFirefox\b/, /\bFxiOS\b/]}, {not: /\bCordova\b/}]},
-                        SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/, /\bCordova\b/]}}]},
+                        SAFARI: {and: [/^((?!CriOS).)*\Safari\b.*$/, {not: {or: [/\bOPR\b/, /\bEdge\b/, /Windows Phone/, /\bCordova\b/,/\bChrome\b/]}}]},
                         OPERA: {or: [/Opera\b/, /\bOPR\b/]},
                         IE: {or: [/\bMSIE\b/, /\bTrident\b/, /^Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)$/]},
                         MS_EDGE: {or: [/\bEdge\b/]},

@@ -51,7 +51,7 @@ describe("ng-device-detector", function () {
 
     describe("with user-agent", function () {
 
-        function describeUserAgent(userAgent, os, os_version, browser, browser_version, device, isMobile, isTablet, isDesktop) {
+        function describeUserAgent(userAgent, os, os_version, browser, browser_version, device, isMobile, isTablet, isDesktop, extras) {
             describe(userAgent, function () {
                 beforeEach(function () {
                     loadDetector(userAgent);
@@ -81,6 +81,9 @@ describe("ng-device-detector", function () {
                 it("should have isDesktop = " + isDesktop, function () {
                     expect(deviceDetector.isDesktop()).toBe(isDesktop);
                 });
+                if (!!extras) {
+                    extras.apply(null, []);
+                }
             });
         }
 
@@ -267,40 +270,48 @@ describe("ng-device-detector", function () {
             "android", "unknown", "firefox", "41.0", "android", true, false, false);
         describeUserAgent("Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0 Cordova/6.2.0",
             "android", "unknown", "cordova", "6.2.0", "android", true, false, false);
+
+        // Issue 62
+        describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.88 Safari/537.36",
+            "windows", "windows-8-1", "chrome", "57.0.2987.88", "unknown", false, false, true, function () {
+                it("Should not have safari detected",function () {
+                    expect(deviceDetector.raw.browser.safari).toBe(false);
+                })
+            });
     });
 
     describe("with custom detection", function () {
         it("should detect custom entry is missing", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry",/\bCustom_UA_Entry\b/);
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", /\bCustom_UA_Entry\b/);
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(false);
         });
 
         it("should detect custom entry", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry",/\bCustom_UA_Entry\b/);
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", /\bCustom_UA_Entry\b/);
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(true);
         });
 
         it("should detect custom entry as string", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry","\\bCustom_UA_Entry\\b");
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", "\\bCustom_UA_Entry\\b");
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(true);
         });
 
         it("should detect custom entry as reTree", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry",{or:["\\bCustom_UA_Entry\\b"]});
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", {or: ["\\bCustom_UA_Entry\\b"]});
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(true);
         });
 
         it("should detect custom entry as complex reTree", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry",{and:["\\bCustom_UA_Entry\\b",{not:"\\bChrome\\b"}]});
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", {and: ["\\bCustom_UA_Entry\\b", {not: "\\bChrome\\b"}]});
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(false);
         });
