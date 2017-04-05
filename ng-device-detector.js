@@ -1,6 +1,84 @@
 (function (angular) {
     "use strict";
 
+    var BROWSERS = {
+        CHROME: "chrome",
+        FIREFOX: "firefox",
+        SAFARI: "safari",
+        OPERA: "opera",
+        IE: "ie",
+        MS_EDGE: "ms-edge",
+        FB_MESSENGER: "fb-messenger",
+        CORDOVA: "cordova",
+        UNKNOWN: "unknown"
+    };
+
+    var DEVICES = {
+        ANDROID: "android",
+        I_PAD: "ipad",
+        IPHONE: "iphone",
+        I_POD: "ipod",
+        BLACKBERRY: "blackberry",
+        FIREFOX_OS: "firefox-os",
+        CHROME_BOOK: "chrome-book",
+        WINDOWS_PHONE: "windows-phone",
+        PS4: "ps4",
+        VITA: "vita",
+        CHROMECAST: "chromecast",
+        APPLE_TV: "apple-tv",
+        GOOGLE_TV: "google-tv",
+        UNKNOWN: "unknown"
+    };
+
+    var OS = {
+        WINDOWS: "windows",
+        MAC: "mac",
+        IOS: "ios",
+        ANDROID: "android",
+        LINUX: "linux",
+        UNIX: "unix",
+        FIREFOX_OS: "firefox-os",
+        CHROME_OS: "chrome-os",
+        WINDOWS_PHONE: "windows-phone",
+        UNKNOWN: "unknown"
+    };
+
+    var OS_VERSIONS = {
+        WINDOWS_3_11: "windows-3-11",
+        WINDOWS_95: "windows-95",
+        WINDOWS_ME: "windows-me",
+        WINDOWS_98: "windows-98",
+        WINDOWS_CE: "windows-ce",
+        WINDOWS_2000: "windows-2000",
+        WINDOWS_XP: "windows-xp",
+        WINDOWS_SERVER_2003: "windows-server-2003",
+        WINDOWS_VISTA: "windows-vista",
+        WINDOWS_7: "windows-7",
+        WINDOWS_8_1: "windows-8-1",
+        WINDOWS_8: "windows-8",
+        WINDOWS_10: "windows-10",
+        WINDOWS_PHONE_7_5: "windows-phone-7-5",
+        WINDOWS_PHONE_8_1: "windows-phone-8-1",
+        WINDOWS_PHONE_10: "windows-phone-10",
+        WINDOWS_NT_4_0: "windows-nt-4-0",
+        MACOSX_15: "mac-os-x-15",
+        MACOSX_14: "mac-os-x-14",
+        MACOSX_13: "mac-os-x-13",
+        MACOSX_12: "mac-os-x-12",
+        MACOSX_11: "mac-os-x-11",
+        MACOSX_10: "mac-os-x-10",
+        MACOSX_9: "mac-os-x-9",
+        MACOSX_8: "mac-os-x-8",
+        MACOSX_7: "mac-os-x-7",
+        MACOSX_6: "mac-os-x-6",
+        MACOSX_5: "mac-os-x-5",
+        MACOSX_4: "mac-os-x-4",
+        MACOSX_3: "mac-os-x-3",
+        MACOSX_2: "mac-os-x-2",
+        MACOSX: "mac-os-x",
+        UNKNOWN: "unknown"
+    };
+
     var OS_RE = {
         WINDOWS: {and: [{or: [/\bWindows|(Win\d\d)\b/, /\bWin 9x\b/]}, {not: /\bWindows Phone\b/}]},
         MAC: {and: [/\bMac OS\b/, {not: /Windows Phone/}]},
@@ -92,84 +170,6 @@
         obj[BROWSERS[key]] = BROWSER_VERSIONS_RE_MAP[key];
         return obj;
     }, {});
-
-    var BROWSERS = {
-        CHROME: "chrome",
-        FIREFOX: "firefox",
-        SAFARI: "safari",
-        OPERA: "opera",
-        IE: "ie",
-        MS_EDGE: "ms-edge",
-        FB_MESSENGER: "fb-messenger",
-        CORDOVA: "cordova",
-        UNKNOWN: "unknown"
-    };
-
-    var DEVICES = {
-        ANDROID: "android",
-        I_PAD: "ipad",
-        IPHONE: "iphone",
-        I_POD: "ipod",
-        BLACKBERRY: "blackberry",
-        FIREFOX_OS: "firefox-os",
-        CHROME_BOOK: "chrome-book",
-        WINDOWS_PHONE: "windows-phone",
-        PS4: "ps4",
-        VITA: "vita",
-        CHROMECAST: "chromecast",
-        APPLE_TV: "apple-tv",
-        GOOGLE_TV: "google-tv",
-        UNKNOWN: "unknown"
-    };
-
-    var OS = {
-        WINDOWS: "windows",
-        MAC: "mac",
-        IOS: "ios",
-        ANDROID: "android",
-        LINUX: "linux",
-        UNIX: "unix",
-        FIREFOX_OS: "firefox-os",
-        CHROME_OS: "chrome-os",
-        WINDOWS_PHONE: "windows-phone",
-        UNKNOWN: "unknown"
-    };
-
-    var OS_VERSIONS = {
-        WINDOWS_3_11: "windows-3-11",
-        WINDOWS_95: "windows-95",
-        WINDOWS_ME: "windows-me",
-        WINDOWS_98: "windows-98",
-        WINDOWS_CE: "windows-ce",
-        WINDOWS_2000: "windows-2000",
-        WINDOWS_XP: "windows-xp",
-        WINDOWS_SERVER_2003: "windows-server-2003",
-        WINDOWS_VISTA: "windows-vista",
-        WINDOWS_7: "windows-7",
-        WINDOWS_8_1: "windows-8-1",
-        WINDOWS_8: "windows-8",
-        WINDOWS_10: "windows-10",
-        WINDOWS_PHONE_7_5: "windows-phone-7-5",
-        WINDOWS_PHONE_8_1: "windows-phone-8-1",
-        WINDOWS_PHONE_10: "windows-phone-10",
-        WINDOWS_NT_4_0: "windows-nt-4-0",
-        MACOSX_15: "mac-os-x-15",
-        MACOSX_14: "mac-os-x-14",
-        MACOSX_13: "mac-os-x-13",
-        MACOSX_12: "mac-os-x-12",
-        MACOSX_11: "mac-os-x-11",
-        MACOSX_10: "mac-os-x-10",
-        MACOSX_9: "mac-os-x-9",
-        MACOSX_8: "mac-os-x-8",
-        MACOSX_7: "mac-os-x-7",
-        MACOSX_6: "mac-os-x-6",
-        MACOSX_5: "mac-os-x-5",
-        MACOSX_4: "mac-os-x-4",
-        MACOSX_3: "mac-os-x-3",
-        MACOSX_2: "mac-os-x-2",
-        MACOSX: "mac-os-x",
-        UNKNOWN: "unknown"
-    };
 
     angular.module("ng.deviceDetector", ["reTree"])
         .constant("OS_RE", OS_RE)
