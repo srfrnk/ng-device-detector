@@ -1,5 +1,5 @@
-#ng-device-detector
-##Angular module to detect OS / Browser / Device
+# ng-device-detector
+##### Angular module to detect OS / Browser / Device
 
 [![Build Status](https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master)](https://travis-ci.org/srfrnk/ng-device-detector)
 
@@ -7,28 +7,53 @@ Uses user-agent to set css classes or directly usable via JS.
 See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.io/ng-device-detector)
 
 ### Install
-* Run $ `bower install ng-device-detector --save`
-* Add script load to HTML:`<script type="text/javascript" src=".../re-tree.js"></script>`
-* Add script load to HTML:`<script type="text/javascript" src=".../ng-device-detector.js"></script>`
-* Add module to your app dependencies: `...angular.module("...", [..."ng.deviceDetector"...])...`
-* To add classes - add directive like so- `<div ... device-detector ...>`
-* To use directly add `"deviceDetector"` service to your injectors...
+NPM
+```sh
+$ npm install ng-device-detector --save
+```
+Bower
+```sh
+$ bower install ng-device-detector --save
+```
+Browser (Add scripts in HTML)
+```sh
+<script type="text/javascript" src=".../re-tree.js"></script>
+<script type="text/javascript" src=".../ng-device-detector.js"></script>
+```
+Adding in module dependencies
+```js
+angular.module('app', ['ng.deviceDetector']);
+```
+Injecting *DeviceDetector* service in controller
+```js
+angular.module('app').controller('Home', function($scope, deviceDetector){
+  // Awesome stuff
+});
+```
+
+To add classes, add directive like: `<div device-detector>`
 
 ### Setup
 
 You can set custom detectors at the provider object.
 The 
 ```javascript
-angular.module(..., ["ng.deviceDetector"])
+angular.module('app', ["ng.deviceDetector"])
     .config(['deviceDetectorProvider', function(deviceDetectorProvider) {
-      deviceDetectorProvider.addCustom("Custom_UA_Entry",{and:["\\bCustom_UA_Entry\\b",{not:"\\bChrome\\b"}]});
+      deviceDetectorProvider.addCustom("Custom_UA_Entry", {
+        and:["\\bCustom_UA_Entry\\b", {
+            not:"\\bChrome\\b"
+        }]
+      });
     }])
-    .controller(..., ["$scope", "deviceDetector", function($scope, deviceDetector) {
-      $scope.customUAEntry = deviceDetector.custom["Custom_UA_Entry"]; // true / false
-    }]);
+    
+    .controller('Home', function($scope, deviceDetector) {
+      // (true / false)
+      $scope.customUAEntry = deviceDetector.custom["Custom_UA_Entry"];
+    });
 ```
 
-Custom detectors will also be added as CSS classes with 'is-' prefix and encoded into css class name casing.
+> Custom detectors will also be added as CSS classes with 'is-' prefix and encoded into css class name casing.
 
 ### deviceDetector service
 Holds the following properties:
