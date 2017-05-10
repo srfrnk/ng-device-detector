@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master)](https://travis-ci.org/srfrnk/ng-device-detector)
 
-Uses user-agent to set css classes or directly usable via JS.
+Uses user-agent to set CSS classes or directly usable via JS.
 See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.io/ng-device-detector)
 
 ### Install
@@ -20,7 +20,7 @@ Browser (Add scripts in HTML)
 <script type="text/javascript" src=".../re-tree.js"></script>
 <script type="text/javascript" src=".../ng-device-detector.js"></script>
 ```
-Adding in module dependencies
+Adding `'ng.deviceDetector'` to your app module dependencies
 ```js
 angular.module('app', ['ng.deviceDetector']);
 ```
@@ -64,8 +64,8 @@ Holds the following properties:
  
 ### Support
 At first I added just major browser, OS, device support.
-With help from mariendries,javierprovecho and crisandretta more support was added.
-[The current list of supported browser,OS, device can be easily viewed in here] (https://github.com/srfrnk/ng-device-detector/blob/master/ng-device-detector.js).
+With help from mariendries, javierprovecho and crisandretta more support was added.
+[The current list of supported browser, OS, device can be easily viewed in here] (https://github.com/srfrnk/ng-device-detector/blob/master/ng-device-detector.js).
 
 Pull-requests with new stuff will be highly appreciated :)
 
