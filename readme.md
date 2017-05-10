@@ -20,7 +20,7 @@ Browser (Add scripts in HTML)
 <script type="text/javascript" src=".../re-tree.js"></script>
 <script type="text/javascript" src=".../ng-device-detector.js"></script>
 ```
-Adding to your app module dependencies
+Adding `'ng.deviceDetector'` to your app module dependencies
 ```js
 angular.module('app', ['ng.deviceDetector']);
 ```
