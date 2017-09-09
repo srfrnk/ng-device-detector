@@ -274,7 +274,7 @@ describe("ng-device-detector", function () {
         // Issue 62
         describeUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.88 Safari/537.36",
             "windows", "windows-8-1", "chrome", "57.0.2987.88", "unknown", false, false, true, function () {
-                it("Should not have safari detected",function () {
+                it("Should not have safari detected", function () {
                     expect(deviceDetector.raw.browser.safari).toBe(false);
                 })
             });
@@ -304,16 +304,35 @@ describe("ng-device-detector", function () {
 
         it("should detect custom entry as reTree", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry", {or: ["\\bCustom_UA_Entry\\b"]});
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", { or: ["\\bCustom_UA_Entry\\b"] });
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(true);
         });
 
         it("should detect custom entry as complex reTree", function () {
             loadDetector("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom_UA_Entry/1.1", function (deviceDetectorProvider) {
-                deviceDetectorProvider.addCustom("Custom_UA_Entry", {and: ["\\bCustom_UA_Entry\\b", {not: "\\bChrome\\b"}]});
+                deviceDetectorProvider.addCustom("Custom_UA_Entry", { and: ["\\bCustom_UA_Entry\\b", { not: "\\bChrome\\b" }] });
             });
             expect(deviceDetector.custom["Custom_UA_Entry"]).toBe(false);
+        });
+    });
+
+    // Issue 72
+    describe("Test custom UA string parsing", function () {
+        it("Should parse the specified UA", function () {
+            loadDetector("");
+            var deviceInfo = deviceDetector.parseUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
+            expect(deviceDetector.browser).toBe("unknown");
+            expect(deviceDetector.os).toBe("unknown");
+            expect(deviceDetector.device).toBe("unknown");
+            expect(deviceInfo.os).toBe("windows");
+            expect(deviceInfo.os_version).toBe("windows-8-1");
+            expect(deviceInfo.browser).toBe("chrome");
+            expect(deviceInfo.browser_version).toBe("37.0.2049.0");
+            expect(deviceInfo.device).toBe("unknown");
+            expect(deviceInfo.isMobile()).toBeFalsy();
+            expect(deviceInfo.isTablet()).toBeFalsy();
+            expect(deviceInfo.isDesktop()).toBeTruthy();
         });
     });
 });
