@@ -18,6 +18,7 @@ $ bower install ng-device-detector --save
 Browser (Add scripts in HTML)
 ```sh
 <script type="text/javascript" src=".../re-tree.js"></script>
+<script type="text/javascript" src=".../ua-device-detector.js"></script>
 <script type="text/javascript" src=".../ng-device-detector.js"></script>
 ```
 Adding `'ng.deviceDetector'` to your app module dependencies

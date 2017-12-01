@@ -7,12 +7,10 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch via NPM",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "test"
-            ],
-            "port": 5858
-        }
+            "name": "Gulp test-server",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["test"],
+            "outputCapture": "std"
+          }
     ]
 }
