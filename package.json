@@ -18,10 +18,12 @@
     "karma-nested-reporter": "^0.1.6",
     "karma-phantomjs-launcher": "^1.0.4",
     "phantomjs": "~2.1.7",
+    "standard-version": "^4.3.0",
     "uglify-js": "^2.8.29"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "release": "node_modules/standard-version/bin/cli.js"
   },
   "description": "Uses user-agent to set css classes or directly usable via JS.",
   "main": "index.js",

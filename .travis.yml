@@ -1,4 +1,10 @@
 sudo: false
 language: node_js
 node_js:
-  - "7.6"
+- "8"
+deploy:
+  provider: npm
+  email: srfrnk@gmail.com
+  api_key: $NPM_TOKEN    
+  on:
+    tags: true
