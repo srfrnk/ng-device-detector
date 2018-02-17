@@ -1,6 +1,6 @@
 {
   "name": "ng-device-detector",
-  "version": "5.0.2",
+  "version": "5.1.0",
   "homepage": "https://github.com/srfrnk/ng-device-detector",
   "authors": [
     "srfrnk <srfrnk@gmail.com>"
@@ -25,6 +25,6 @@
   ],
   "dependencies": {
     "re-tree": "^0.0.2",
-    "ua-device-detector": "^1.0.1"    
+    "ua-device-detector": "^1.0.1"
   }
 }
