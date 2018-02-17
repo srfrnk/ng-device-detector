@@ -1,6 +1,6 @@
 {
   "name": "ng-device-detector",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "devDependencies": {
     "angular": "^1.6.7",
     "angular-mocks": "^1.6.7",
