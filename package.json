@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/srfrnk/ng-device-detector",
   "dependencies": {
-    "re-tree": "~0.0.2",
-    "ua-device-detector": "^1.0.1"
+    "re-tree": "^0.1.7",
+    "ua-device-detector": "^1.1.1"
   }
 }
