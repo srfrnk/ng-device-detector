@@ -2,6 +2,17 @@
 ##### Angular module to detect OS / Browser / Device
 
 [![Build Status](https://travis-ci.org/srfrnk/ng-device-detector.svg?branch=master)](https://travis-ci.org/srfrnk/ng-device-detector)
+[![GitHub issues](https://img.shields.io/github/issues/srfrnk/ng-device-detector.svg)](https://github.com/srfrnk/ng-device-detector/issues)
+[![Known Vulnerabilities](https://snyk.io/package/npm/ng-device-detector/badge.svg)](https://snyk.io/package/npm/ng-device-detector)
+[![Open Source Helpers](https://www.codetriage.com/srfrnk/ng-device-detector/badges/users.svg)](https://www.codetriage.com/srfrnk/ng-device-detector)
+
+[![GitHub license](https://img.shields.io/github/license/srfrnk/ng-device-detector.svg)](https://github.com/srfrnk/ng-device-detector/blob/master/license.txt)
+[![npm](https://img.shields.io/npm/dm/ng-device-detector.svg)](https://www.npmjs.com/package/ng-device-detector) 
+[![npm](https://img.shields.io/npm/dt/ng-device-detector.svg)](https://www.npmjs.com/package/ng-device-detector)
+[![npm](https://img.shields.io/npm/v/ng-device-detector.svg)](https://www.npmjs.com/package/ng-device-detector)
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 
 Uses user-agent to set CSS classes or directly usable via JS.
 See website: [http://srfrnk.github.io/ng-device-detector](http://srfrnk.github.io/ng-device-detector)
