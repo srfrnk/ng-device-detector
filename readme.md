@@ -77,7 +77,7 @@ Holds the following properties:
 ### Support
 At first I added just major browser, OS, device support.
 With help from mariendries, javierprovecho and crisandretta more support was added.
-[The current list of supported browser, OS, device can be easily viewed in here] (https://github.com/srfrnk/ng-device-detector/blob/master/ng-device-detector.js).
+[The current list of supported browser, OS, device can be easily viewed in here](https://github.com/srfrnk/ng-device-detector/blob/master/ng-device-detector.js).
 
 Pull-requests with new stuff will be highly appreciated :)
 
