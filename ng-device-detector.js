@@ -37,6 +37,10 @@
                     var ua = $window.navigator.userAgent;
                     var deviceInfo = uaDeviceDetector.parseUserAgent(ua);
                     deviceInfo.parseUserAgent = uaDeviceDetector.parseUserAgent;
+                    deviceInfo.custom = customDetectors.reduce(function (custom, customDetector) {
+                        custom[customDetector.name] = reTree.test(ua, customDetector.re);
+                        return custom;
+                    }, {});
                     return deviceInfo;
                 }];
         }

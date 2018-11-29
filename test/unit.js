@@ -5,6 +5,9 @@ describe("ng-device-detector", function () {
 
     function loadDetector(userAgent, setup) {
         module("ng.deviceDetector", function (deviceDetectorProvider) {
+            deviceDetectorProvider.addCustom('MY_CUSTOM', {
+                and: ['\\bCustom\\b']
+            });
             if (!!setup) {
                 setup.apply(null, [deviceDetectorProvider]);
             }
@@ -52,9 +55,10 @@ describe("ng-device-detector", function () {
     // Issue 72
     describe("Test custom UA string parsing", function () {
         it("Should parse the specified UA", function () {
-            loadDetector("");
-            var deviceInfo = deviceDetector.parseUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
+            loadDetector("Custom");                         
+            var deviceInfo = deviceDetector.parseUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom");            
             expect(deviceDetector.browser).toBe("unknown");
+            expect(deviceDetector.custom.MY_CUSTOM).toBeTruthy();
             expect(deviceDetector.os).toBe("unknown");
             expect(deviceDetector.device).toBe("unknown");
             expect(deviceInfo.os).toBe("windows");
