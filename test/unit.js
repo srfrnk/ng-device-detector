@@ -52,8 +52,12 @@ describe("ng-device-detector", function () {
     // Issue 72
     describe("Test custom UA string parsing", function () {
         it("Should parse the specified UA", function () {
-            loadDetector("");
-            var deviceInfo = deviceDetector.parseUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
+            loadDetector("Custom", function(deviceDetectorProvider) {
+                deviceDetectorProvider.addCustom('MY_CUSTOM', {
+                    and: ['\\bCustom\\b']
+                });
+            });
+            var deviceInfo = deviceDetector.parseUserAgent("Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36 Custom");
             expect(deviceDetector.browser).toBe("unknown");
             expect(deviceDetector.os).toBe("unknown");
             expect(deviceDetector.device).toBe("unknown");
@@ -65,6 +69,7 @@ describe("ng-device-detector", function () {
             expect(deviceInfo.isMobile()).toBeFalsy();
             expect(deviceInfo.isTablet()).toBeFalsy();
             expect(deviceInfo.isDesktop()).toBeTruthy();
+            expect(deviceDetector.custom.MY_CUSTOM).toBeTruthy();
         });
     });
 });

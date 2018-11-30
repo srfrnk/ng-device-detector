@@ -15,7 +15,7 @@
                 };
 
                 this.isIOS = function () {
-                    return (deviceInfo.os === uaDeviceDetector.OS.IOS || deviceInfo.device === uaDeviceDetector.DEVICES.I_POD || 
+                    return (deviceInfo.os === uaDeviceDetector.OS.IOS || deviceInfo.device === uaDeviceDetector.DEVICES.I_POD ||
                         deviceInfo.device === uaDeviceDetector.DEVICES.IPHONE);
                 };
             }
@@ -35,8 +35,8 @@
                     reTree
                 ) {
                     var ua = $window.navigator.userAgent;
-                    var deviceInfo = uaDeviceDetector.parseUserAgent(ua);
-                    deviceInfo.parseUserAgent = uaDeviceDetector.parseUserAgent;
+                    var deviceInfo = uaDeviceDetector.parseUserAgent(ua, customDetectors);
+                    deviceInfo.parseUserAgent = function (ua) { return uaDeviceDetector.parseUserAgent(ua, customDetectors) };
                     return deviceInfo;
                 }];
         }
