@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.3"></a>
+## [5.1.3](https://github.com/srfrnk/ng-device-detector/compare/v5.1.2...v5.1.3) (2018-12-01)
+
+
+### Bug Fixes
+
+* fixes [#81](https://github.com/srfrnk/ng-device-detector/issues/81) ([fb33d03](https://github.com/srfrnk/ng-device-detector/commit/fb33d03))
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/srfrnk/ng-device-detector/compare/v5.1.1...v5.1.2) (2018-02-24)
 
