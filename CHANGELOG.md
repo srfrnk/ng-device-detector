@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.4"></a>
+## [5.1.4](https://github.com/srfrnk/ng-device-detector/compare/v5.1.3...v5.1.4) (2019-10-21)
+
+
+
 <a name="5.1.3"></a>
 ## [5.1.3](https://github.com/srfrnk/ng-device-detector/compare/v5.1.2...v5.1.3) (2018-12-01)
 
