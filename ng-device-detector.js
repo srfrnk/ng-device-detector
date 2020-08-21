@@ -35,8 +35,10 @@
                     reTree
                 ) {
                     var ua = $window.navigator.userAgent;
-                    var deviceInfo = uaDeviceDetector.parseUserAgent(ua, customDetectors);
-                    deviceInfo.parseUserAgent = function (ua) { return uaDeviceDetector.parseUserAgent(ua, customDetectors) };
+                    var platform = $window.navigator.platform;
+                    var maxTouchPoints= $window.navigator.maxTouchPoints;
+                    var deviceInfo = uaDeviceDetector.parseUserAgent(ua, customDetectors, platform, maxTouchPoints );
+                    deviceInfo.parseUserAgent = function (ua, platform, maxTouchPoints) { return uaDeviceDetector.parseUserAgent(ua, customDetectors, platform, maxTouchPoints) };
                     return deviceInfo;
                 }];
         }
